@@ -12,11 +12,17 @@ class MySQL extends Db{
 	* @param string $username
 	* @param string $password
 	*/
-	function __construct($host, $dbname, $username, $password){
+	function __construct(){
 		try{
+			$host = "localhost";
+			$dbname = "test";
+			$username = "root";
+			$password = "";
+
 			if(!$this->connect("mysql:host={$host};dbname={$dbname}", $username, $password)){
 				throw new Exception("Cannot connect to db", 1);
 			}
+
 		} catch(Exception $e){
 			throw $e;
 		}

@@ -2,7 +2,7 @@
 require 'model/MySQL.php';
 
 try{
-	$model = new MySQL('localhost', 'test', 'root', '');
+	$model = new MySQL();
 
 	//
 	$data = [
