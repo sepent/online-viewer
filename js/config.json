@@ -1,7 +1,7 @@
 {
-	"logouttime" : 20000,
+	"logouttime" : false,
 
-	"speedlighting" : 100,
+	"speedlighting" : false,
 
 	"mapKey" : "As8UzukXgfjnNg9BhvsECsudfuvHv88Qv4-bK5U_D3yN187IqnPbUAGqps4AyKSB",
 

@@ -30,7 +30,7 @@ $(document).ready(function(){
  			type: "GET",
  			dataType: "json",
 
- 			// Success handle
+ 			// Success handle 
  			success: function(response){
  				if(response.status){
  					//alert(response);

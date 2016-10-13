@@ -39,6 +39,11 @@
 
         <div><button class="btn">Search</button></div>
       </form>
+      <!-- HTML for setting -->
+      <div class="setting-panel">
+        <div><input type="checkbox" class="cbx" id="cbx-rotation"> <label for="cbx-rotation">Rotation</label></div>
+        <div><input type="checkbox" class="cbx" id="cbx-lighting"> <label for="cbx-lighting">Enable lighting</label></div>
+      </div>
     </div>
   </div>
   <!-- END HTML for filter panel -->

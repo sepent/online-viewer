@@ -9,7 +9,7 @@ function User(data){
 	*
 	*/
 	this.point = {
-    	position : Cesium.Cartesian3.fromDegrees(this.data.latitue, this.data.longtitue),
+    	position : Cesium.Cartesian3.fromDegrees(this.data.latitude, this.data.longitude),
     	description: '<img width="100%" height="100px" src="'+ this.data.avatar+'"/>', 
     	name: this.data.username,
     	text: '5',

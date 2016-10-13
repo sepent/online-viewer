@@ -15,7 +15,7 @@ class User extends Db{
 	function __construct(){
 		try{
 			$host = "localhost";
-			$dbname = "usersviewer";
+			$dbname = "viewer";
 			$username = "root";
 			$password = "";
 
@@ -38,10 +38,6 @@ class User extends Db{
 	*/
 	public function selectUserLogin($bundle, $starttime, $endtime){
 		try{
-			// Check inject sql
-			$bundle = addslashes($bundle);
-			$starttime = addslashes($starttime);
-			$endtime = addslashes($endtime);
 
 			$sql = "SELECT * FROM users";
 
@@ -65,7 +61,9 @@ class User extends Db{
 				return [];
 			}
 
-			return $data->fetchAll(PDO::FETCH_ASSOC);
+			$rs = $data->fetchAll(PDO::FETCH_ASSOC);
+
+			return $rs ? $rs : [];
 
 		} catch (Exception $e){
 			throw $e;

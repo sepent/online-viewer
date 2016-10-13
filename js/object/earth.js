@@ -100,12 +100,12 @@ function Earth(id, config){
 	*
 	*/
 	this.logout = function(point){
-		if(this.users[point.userid] != undefined){
-			var live = this.users[point.userid];
-			window.clearTimeout(this.users[point.userid].lightingTimeout);
-			window.clearTimeout(this.users[point.userid].logoutTimeout);
+		if(this.users[point.user_uid] != undefined){
+			var live = this.users[point.user_uid];
+			window.clearTimeout(this.users[point.user_uid].lightingTimeout);
+			window.clearTimeout(this.users[point.user_uid].logoutTimeout);
 			this.viewer.entities.remove(live.entity);
-			this.users[point.userid] = undefined;
+			this.users[point.user_uid] = undefined;
 		}
 	};
 
@@ -154,16 +154,28 @@ function Earth(id, config){
 				times++;
 			}
 
-			parent.users[_point.userid] = user;
+			parent.users[_point.user_uid] = user;
 
 			if(!(times > 25 && opacity >= 1)){
-				parent.users[_point.userid].lightingTimeout = window.setTimeout(effectLighting, parent.config.speedlighting);
+				parent.users[_point.user_uid].lightingTimeout = window.setTimeout(effectLighting, parent.config.speedlighting);
 			} else {
-				parent.users[_point.userid].logoutTimeout = window.setTimeout(logoutAffter, parent.config.logouttime); //parent.config.logouttime
+				if(parent.config.logouttime != false){
+					parent.users[_point.user_uid].logoutTimeout = window.setTimeout(logoutAffter, parent.config.logouttime);
+				}
 			}
 		}
 
-		effectLighting();
+		if(this.config.speedlighting == false){
+			point.billboard.color = new Cesium.Color(1, 1, 1, 1);
+			user.entity = this.viewer.entities.add(point);
+			this.users[_point.user_uid] = user;
+
+			if(this.config.logouttime != false){
+				this.users[_point.user_uid].logoutTimeout = window.setTimeout(logoutAffter, this.config.logouttime);
+			}
+		} else {
+			effectLighting();
+		}
 	};
 
 	/**
@@ -171,8 +183,8 @@ function Earth(id, config){
 	*
 	*/
 	this.resetUser = function(){
-		for (var key in this.users.length) {
-			this.logout({userid: key});
+		for (var key in this.users) {
+			this.logout({user_uid: key});
 		}
 	}
 }
