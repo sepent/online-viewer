@@ -23,7 +23,7 @@ $(document).ready(function(){
 
  		var url = $(this).attr('action');
  		var data = $(this).serialize();
- 		
+ 		$('.loading-container').addClass('active');
  		$.ajax({
  			url: url,
  			data: data,
@@ -32,6 +32,7 @@ $(document).ready(function(){
 
  			// Success handle 
  			success: function(response){
+ 				$('.loading-container').removeClass('active');
  				if(response.status){
  					//alert(response);
 	 				galaxy.earth.resetUser();
@@ -46,8 +47,27 @@ $(document).ready(function(){
 
  			// Error handle
  			error: function(){
-
+ 				$('.loading-container').removeClass('active');
+ 				alert('Could not connect to server.');
  			}
  		});
+ 	});
+
+ 	/**
+ 	* Event when change rotation
+ 	*
+ 	*/
+ 	$(document).on('change', '#cbx-rotation, #cbx-lighting', function(){
+ 		if($('#cbx-rotation').is(":checked")){
+ 			galaxy.earth.startRotate(galaxy.earth.config.rotation);
+ 		} else {
+ 			galaxy.earth.stopRotate();
+ 		}
+
+ 		if($('#cbx-lighting').is(":checked")){
+ 			galaxy.earth.enableLighting(true);
+ 		} else {
+ 			galaxy.earth.enableLighting(false);
+ 		}
  	});
 });

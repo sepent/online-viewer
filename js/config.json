@@ -5,6 +5,8 @@
 
 	"mapKey" : "As8UzukXgfjnNg9BhvsECsudfuvHv88Qv4-bK5U_D3yN187IqnPbUAGqps4AyKSB",
 
+	"rotation": 100,
+
 	"cesium": {
 	    "animation": false,
 

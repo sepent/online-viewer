@@ -59,7 +59,7 @@
   <script src="js/object/earth.js"></script>
   <script src="js/object/galaxy.js"></script>
   <script src="js/init.js"></script>
-  <script src="js/event-offline.js"></script>
+  <!-- <script src="js/event-offline.js"></script> -->
   <script type="text/javascript" src="js/map.js"></script>
 
 </body>
