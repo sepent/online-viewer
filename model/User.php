@@ -81,7 +81,7 @@ class User extends Db{
 	* @return array
 	*/
 	public function insertUserLogin($user)
-	{	date_default_timezone_set("Asia/Ho_Chi_Minh"); 
+	{	//date_default_timezone_set("Asia/Ho_Chi_Minh"); 
 		
 
 
@@ -103,57 +103,58 @@ class User extends Db{
 			/**
 				$user_uid use test update
 			*/
-			//$user_uid = 'user_04';
+			//$user_uid = 'user_4486';
 
-			$sqlselect = "SELECT * FROM users WHERE user_uid = '$user_uid' ";
+			$sqlselect = "SELECT * FROM users "." WHERE user_uid = '$user_uid'";
 			$dataselect = $this->connection->query($sqlselect);
 
-				if($dataselect == null){
-					$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country)"
-					   		." VALUES ('$user_uid',
-					   					'$bundleid',
-					   					'$latitude',
-					   					'$longitude',
-					   					'$username',
-					   					'$timestamp',
-										'$avatar',
-										'$device_type',
-										'$device_platform',
-										'$device_uid',
-										'$user_oauthUid',
-										'$city',
-										'$country'
-					   					)";
-							$data =  $this->connection->query($sql);
+			
+			if(!$dataselect || !$dataselect->fetchAll(PDO::FETCH_ASSOC)){
+				$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country)"
+				   		." VALUES ('$user_uid',
+				   					'$bundleid',
+				   					'$latitude',
+				   					'$longitude',
+				   					'$username',
+				   					'$timestamp',
+									'$avatar',
+									'$device_type',
+									'$device_platform',
+									'$device_uid',
+									'$user_oauthUid',
+									'$city',
+									'$country'
+				   					)";
+				$data =  $this->connection->query($sql);
 
-							if ($data) {
-							    echo "insert successfully";
-							} else { 
-								echo 'error';
-							}
-				}else{
-					$sql =" UPDATE users"
-						. " SET 	bundleId ='$bundleid',"
-						. " latitude ='$latitude',"
-					   	. " longitude ='$longitude',"
-					   	. " username = '$username',"
-					   	. " timestamp ='$timestamp',"
-					   	. " avatar ='$avatar',"
-					   	. " device_type ='$device_type',"
-					   	. " device_platform ='$device_platform',"
-					   	. " device_uid = '$device_uid',"
-					   	. " user_oauthUid ='$user_oauthUid',"
-					   	. " city ='$city',"
-					   	. " country ='$country'"
-					   	. " WHERE user_uid = '$user_uid'";
-					echo $sql;						
-					$data =  $this->connection->query($sql);
-					if($data){
-						echo "update successfully";
-					}else{
-						echo "update error";
-					}
+				if ($data) {
+				    return true;
+				} else { 
+					return false;
 				}
+
+			}else{
+				$sql =" UPDATE users"
+					. " SET 	bundleId ='$bundleid',"
+					. " latitude ='$latitude',"
+				   	. " longitude ='$longitude',"
+				   	. " username = '$username',"
+				   	. " timestamp ='$timestamp',"
+				   	. " avatar ='$avatar',"
+				   	. " device_type ='$device_type',"
+				   	. " device_platform ='$device_platform',"
+				   	. " device_uid = '$device_uid',"
+				   	. " user_oauthUid ='$user_oauthUid',"
+				   	. " city ='$city',"
+				   	. " country ='$country'"
+				   	. " WHERE user_uid = '$user_uid'";					
+				$data =  $this->connection->query($sql);
+				if($data){
+					return true;
+				}else{
+					return false;
+				}
+			}
 					    
 		}catch (Exception $e){
 			throw $e;
