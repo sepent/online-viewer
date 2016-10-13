@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="http://localhost:8181/socket.io/socket.io.js"></script>
+</head>
+<body>
+Lat: <input type="text" class="lat" name=""><br/>
+Lng: <input type="text" class="lng" name=""><br/>
+Username <input type="text" class="username" name=""><br/>
+Password <input type="text" class="password" name=""><br/>
+Avatar <input type="text" class="avatar" name=""><br/>
+Full name <input type="text" class="fullname" name=""><br>
+Age	<input type="text" class="age" name="">
+
+<button class="logged">Logged</button>
+<button class="logout">Logout</button>
+
+<script>
+  var socket = io('http://localhost:8181');
+  socket.on('connected', function (data) {
+  	$('.logged').click(function(){
+		var lat = $('.lat').val();
+		var lng = $('.lng').val();
+		var username = $('.username').val();
+		var password = $('.password').val();
+		var fullname = $('.fullname').val();
+		var avatar = $('.avatar').val();
+		var age = $('.age').val();
+
+		socket.emit('logged', [{lat: parseInt(lat), lng: parseInt(lng), username: username, password: password, fullname: fullname, age: age, avatar: avatar}]);
+	});
+
+	$('.logout').click(function(){
+		var lat = $('.lat').val();
+		var lng = $('.lng').val();
+		var username = $('.username').val();
+		socket.emit('logout', [{lat: parseInt(lat), lng: parseInt(lng), username: username}]);
+	});
+  });
+</script>
+</body>
+</html>
