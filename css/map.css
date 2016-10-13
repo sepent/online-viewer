@@ -1,0 +1,77 @@
+/*Import css*/
+@import url(../plugins/cesium/Build/Cesium/Widgets/widgets.css);
+
+#filter-container{
+	position: fixed;
+	width: 250px;
+	padding: 5px;
+	background: #fff;
+	border: 1px solid #ddd;
+	top: 5px;
+	left: -265px;
+	transition: all 1s ease;
+}
+
+#filter-content{
+	width: 100%;
+}
+
+#filter-container.active{
+	left: 5px;
+}
+
+#filter-container .btn-show{
+	background: #fff;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	position: absolute;
+	right: -28px;
+	top: 5px;
+	border-top: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+.btn{
+	display: block;
+	width: 100%;
+	margin: 2px 0;
+	background-color: #09c;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	padding: 5px;
+	color: #fff;
+	box-sizing: border-box;
+}
+.btn:active{
+	background-color: #09d;
+}
+
+.ipt{
+	border: 1px solid #ddd;
+	padding: 5px;
+	outline: none;
+	display: block;
+	width: 100%;
+	margin: 2px 0;
+	box-sizing: border-box;
+}
+
+.ipt:focus{
+	border: 1px solid #09c;
+}
+
+label{
+	display: block;
+}
+
+/* CSS custome earth */
+html, body, #earthContainer {
+    width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+}
+
+body{
+	background-color: #000;
+}
