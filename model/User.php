@@ -3,7 +3,7 @@ require 'Db.php';
 /**
 * 
 */
-class MySQL extends Db{
+class User extends Db{
 	/**
 	* construct method
 	*
@@ -15,7 +15,7 @@ class MySQL extends Db{
 	function __construct(){
 		try{
 			$host = "localhost";
-			$dbname = "test";
+			$dbname = "viewer";
 			$username = "root";
 			$password = "";
 
@@ -37,7 +37,39 @@ class MySQL extends Db{
 	* @return array
 	*/
 	public function selectUserLogin($bundle, $starttime, $endtime){
-		return [];
+		try{
+			// Check inject sql
+			$bundle = addslashes($bundle);
+			$starttime = addslashes($starttime);
+			$endtime = addslashes($endtime);
+
+			$sql = "SELECT * FROM users";
+
+			if($bundle){
+				$sql .= " WHERE bundleId LIKE '{$bundle}'";
+			} else {
+				$sql .= " WHERE bundleId LIKE '%'";
+			}
+
+			if($starttime){
+				$sql .= " AND timestamp >= '{$starttime}'";
+			}
+
+			if($endtime){
+				$sql .= " AND timestamp <= '{$endtime}'";
+			}
+
+			$data = $this->connection->query($sql);
+
+			if(!$data){
+				return [];
+			}
+
+			return $data->fetchAll(PDO::FETCH_ASSOC);
+
+		} catch (Exception $e){
+			throw $e;
+		}
 	}
 
 	/**

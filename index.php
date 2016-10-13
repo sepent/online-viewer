@@ -21,10 +21,10 @@
   <div id="filter-container" class="active">
     <button class="btn-show">[x]</button>
     <div class="filter-content">
-      <form action="/ajax.php" method="post" id="filter-form">
+      <form action="/getuser.php" method="post" id="filter-form">
         <label for="">BundleId:</label>
         <div class="">
-          <input type="text" class="ipt" id="txtBundle" name="bundleid">
+          <input type="text" class="ipt" id="txtBundle" name="bundleId">
         </div>
 
         <label>Start Time:</label>
