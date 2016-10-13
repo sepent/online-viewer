@@ -1,37 +1,10 @@
 var galaxy = null;
-
-//$('.loading-container').addClass('active');
-var data = {
-	"logouttime" : 20000,
-
-	"speedlighting" : 100,
-
-	"mapKey" : "As8UzukXgfjnNg9BhvsECsudfuvHv88Qv4-bK5U_D3yN187IqnPbUAGqps4AyKSB",
-
-	"cesium": {
-	    "animation": false,
-
-	    "baseLayerPicker": false, 
-
-	    "homeButton": false,
-
-	    "infoBox": true,
-
-	    "selectionIndicator": true,
-
-	    "timeline": false,
-
-	    "navigationHelpButton": false,
-	    
-	    "fullscreenButton": false
-	}
-};
-
-//$.get('Apps/config.json', function(data){
+$('.loading-container').addClass('active');
+$.getJSON('js/config.json', function(data){
 	galaxy = new Galaxy('earthContainer', data);
 	galaxy.earth.show();
-	//$('.loading-container').removeClass('active');
-//});
+	$('.loading-container').removeClass('active');
+});
 
 
 

@@ -1,6 +1,7 @@
 /*Import css*/
 @import url(../plugins/cesium/Build/Cesium/Widgets/widgets.css);
 
+/* CSS for filter panel */
 #filter-container{
 	position: fixed;
 	width: 250px;
@@ -64,6 +65,19 @@
 }
 
 label{
+	display: block;
+}
+/* CSS for loading container*/
+.loading-container{
+	position: fixed;
+	text-align: center;
+	top: 20px;
+	width: 100%;
+	left: 0px;
+	color: #fff;
+	display: none;
+}
+.loading-container.active{
 	display: block;
 }
 

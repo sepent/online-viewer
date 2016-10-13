@@ -1,0 +1,25 @@
+{
+	"logouttime" : 20000,
+
+	"speedlighting" : 100,
+
+	"mapKey" : "As8UzukXgfjnNg9BhvsECsudfuvHv88Qv4-bK5U_D3yN187IqnPbUAGqps4AyKSB",
+
+	"cesium": {
+	    "animation": false,
+
+	    "baseLayerPicker": false, 
+
+	    "homeButton": false,
+
+	    "infoBox": true,
+
+	    "selectionIndicator": true,
+
+	    "timeline": false,
+
+	    "navigationHelpButton": false,
+	    
+	    "fullscreenButton": false
+	}
+}

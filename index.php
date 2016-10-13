@@ -43,6 +43,8 @@
   </div>
   <!-- END HTML for filter panel -->
 
+  <div class="loading-container">Loading...</div>
+
   <!-- Js for plugins -->
   <script src="plugins/cesium/Build/Cesium/Cesium.js"></script>
   <script src="plugins/jquery/jquery.min.js"></script>

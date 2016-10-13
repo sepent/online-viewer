@@ -22,25 +22,25 @@ $(document).ready(function(){
  		e.preventDefault();
 
  		var url = $(this).attr('action');
-
+ 		var data = $(this).serialize();
+ 		
  		$.ajax({
  			url: url,
- 			data: {
- 				bundle: '',
- 				starttime: '',
- 				endtime: ''
- 			},
- 			type: "POST",
+ 			data: data,
+ 			type: "GET",
+ 			dataType: "json",
 
  			// Success handle
  			success: function(response){
- 				//alert(response);
- 				galaxy.earth.resetUser();
+ 				if(response.status){
+ 					//alert(response);
+	 				galaxy.earth.resetUser();
 
- 				response = JSON.parse(response);
-
- 				for (var i = 0; i < response.length; i++) {
- 					galaxy.earth.login(response[i]);
+	 				for (var i = 0; i < response.users.length; i++) {
+	 					galaxy.earth.login(response.users[i]);
+	 				}
+ 				} else {
+ 					alert('Have error when searching. :: ' + response.message);
  				}
  			},
 
