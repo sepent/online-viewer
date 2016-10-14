@@ -5,8 +5,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
-<button type="button" class="btn btn-primary">Insert data</button>
-	<script>
+
+<script>
 
 function autoinsert(){
 				var id = Math.floor(Math.random() * 100);
@@ -44,6 +44,11 @@ function autoinsert(){
 						}
 					});	
 		}
-setInterval(autoinsert, 1000*60);
+setInterval(autoinsert, 3000);
+
+// var array = [1,2,3,4,5,6,7,8,9,10];
+// var rand = array[Math.floor(Math.random() * array.length)];
+
+// console.log(rand);
 	</script>
 </html>

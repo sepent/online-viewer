@@ -95,21 +95,20 @@ class User extends Db{
 			$city = $user['city'];
 			$country = $user['country'];
 
-			//$user_uid = 'user_4486';
 			$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country)"
-			   		." VALUES ('$user_uid',
-			   					'$bundleid',
-			   					'$latitude',
-			   					'$longitude',
-			   					'$username',
-			   					'$timestamp',
-								'$avatar',
-								'$device_type',
-								'$device_platform',
-								'$device_uid',
-								'$user_oauthUid',
-								'$city',
-								'$country'
+			   		." VALUES ('{$user['timestamp']}',
+			   					'{$user['bundleid']}',
+			   					'{$user['latitude']}',
+			   					'{$user['longitude']}',
+			   					'{$user['username']}',
+			   					'{$user['timestamp']}',
+								'{$user['avatar']}',
+								'{$user['device_type']}',
+								'{$user['device_platform']}',
+								'{$user['device_uid']}',
+								'{$user['user_oauthUid']}',
+								'{$user['city']}',
+								'{$user['country']}'
 			   					)";
 			$data =  $this->connection->query($sql);
 
