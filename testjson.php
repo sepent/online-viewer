@@ -4,8 +4,8 @@
 	<title>Tester insert Json object</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
-<body>
 
+<body>
 <script>
 
 function autoinsert(){
@@ -13,8 +13,13 @@ function autoinsert(){
 				var lat= Math.floor(Math.random() * 100);
 				var lon =Math.floor(Math.random() * 100);
 
+				var arrayBundid =['com.akademia.ryokou','overfull.net','google.com','apple.com'];
+
+				var rand = arrayBundid[Math.floor(Math.random() * arrayBundid.length)];
+
+
 				var data = {
-							bundleId: 'com.akademia.ryokou'+id,
+							bundleId: rand,
 							user: {
 									uid: 'user_'+id,
 									username:'username'+id,
@@ -44,6 +49,6 @@ function autoinsert(){
 						}
 					});	
 		}
-setInterval(autoinsert, 60000);
+setInterval(autoinsert, 3000);
 	</script>
 </html>
