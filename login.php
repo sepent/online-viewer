@@ -1,8 +1,8 @@
 <?php
 /**
-* getuser.php file
-* When have ajax call from view (earth) with parameters
-* this page return data to view as json 
+* login.php file
+* When have post request from login application
+* this page save data to database 
 * @method get
 */
 
