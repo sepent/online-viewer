@@ -9,6 +9,7 @@ $(document).ready(function(){
 	});
 
 	jQuery.datetimepicker.setLocale('ja');
+	
 	$('#txtStarttime').datetimepicker({
 		dayOfWeekStart : 1,
 		//lang:'ja',
@@ -58,6 +59,7 @@ $(document).ready(function(){
  			}
  		});
  	}
+
  	$(document).on('submit', '#filter-form', function(e){
  		e.preventDefault();
 

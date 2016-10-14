@@ -66,16 +66,11 @@ function Earth(id, config){
 		    }
 		}
 
-		//function viewInICRF(time) {
-		  //  Sandcastle.declare(viewInICRF);
-
 		camera.flyHome(0);
 		    
 		clock.multiplier = times;
 		this.rotation = scene.preRender.addEventListener(icrf);
 		scene.globe.enableLighting = true;
-		//}
-		//viewInICRF(3 * 60 * 60);
 	}
 
 	/**
@@ -96,8 +91,8 @@ function Earth(id, config){
 	}
 
 	/**
-	* remove point
-	*
+	* logout method
+	* This method will be remove this user on earth
 	*/
 	this.logout = function(point){
 		if(this.users[point.user_uid] != undefined){
@@ -110,8 +105,9 @@ function Earth(id, config){
 	};
 
 	/**
-	* createPoints method
+	* login method
 	*
+	* This method will be added user point on the earth
 	*/
 	this.login = function(_point){
 		this.logout(_point);
@@ -180,7 +176,7 @@ function Earth(id, config){
 
 	/**
 	* Reset user
-	*
+	* This method will remove all user on earth
 	*/
 	this.resetUser = function(){
 		for (var key in this.users) {

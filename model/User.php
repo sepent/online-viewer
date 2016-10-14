@@ -37,19 +37,24 @@ class User extends Db{
 
 			$sql = "SELECT * FROM users";
 
+			// Check if have bundle name
 			if($bundle){
 				$sql .= " WHERE bundleId LIKE '{$bundle}'";
 			} else {
 				$sql .= " WHERE bundleId LIKE '%'";
 			}
 
+			// Check if have start time
 			if($starttime){
 				$sql .= " AND timestamp >= '{$starttime}'";
 			}
 
+			// Check if have end time
 			if($endtime){
 				$sql .= " AND timestamp <= '{$endtime}'";
 			}
+
+			$sql .= " ORDER BY timestamp DESC";
 
 			$data = $this->connection->query($sql);
 
@@ -57,6 +62,7 @@ class User extends Db{
 				return [];
 			}
 
+			// Fetch data to an array
 			$rs = $data->fetchAll(PDO::FETCH_ASSOC);
 
 			return $rs ? $rs : [];
@@ -72,9 +78,7 @@ class User extends Db{
 	* @param array $user
 	* @return array
 	*/
-	public function insertUserLogin($user){	
-		//date_default_timezone_set("Asia/Ho_Chi_Minh"); 
-		
+	public function insertUserLogin($user){			
 		try{
 			$user_uid = $user['userid'];
 			//$timestamp = date('Y-m-d H:i:s');
@@ -91,9 +95,6 @@ class User extends Db{
 			$city = $user['city'];
 			$country = $user['country'];
 
-			/**
-				$user_uid use test update
-			*/
 			//$user_uid = 'user_4486';
 			$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country)"
 			   		." VALUES ('$user_uid',
@@ -121,10 +122,5 @@ class User extends Db{
 		}catch (Exception $e){
 			throw $e;
 		}
-	}
-
-	public function insertJson($value='')
-	{
-		
 	}
 }

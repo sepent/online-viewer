@@ -15,7 +15,7 @@ function User(data){
                   + '<div><span>Device:</span> ' + this.data.device_platform + '</div>'
                   + '<div><span>Longitude:</span> ' + this.data.longitude + '</div>'
                   + '<div><span>Latitude:</span> ' + this.data.latitude + '</div>'
-                  + '<div><span>Device:</span> ' + this.data.device_platform + '</div>'
+                  + '<div><span>Timestamp:</span> ' + this.data.timestamp + '</div>'
                   + '<div style="clear: both"></div>'
                   + '</div>', 
     	name: this.data.username,
