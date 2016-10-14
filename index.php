@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <title>User's view</title>
   <!-- CSS for plugins -->
-  <!-- <link rel="stylesheet" type="text/css" href="plugins/datepicker/css/bootstrap-datetimepicker.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="plugins/datepicker/jquery.datetimepicker.css">
   <link rel="stylesheet" type="text/css" href="css/map.css">
 </head>
 <body>
@@ -23,21 +23,15 @@
     <div class="filter-content">
       <form action="getuser.php" method="post" id="filter-form">
         <label for="">BundleId:</label>
-        <div class="">
-          <input type="text" class="ipt" id="txtBundle" name="bundleId">
-        </div>
+        <input type="text" class="ipt" id="txtBundle" name="bundleId">
 
         <label>Start Time:</label>
-        <div class="date input-append" id="start-datetimepicker" data-date="12-02-2012">
-          <input type="text" class="ipt" id="txtStarttime" name="starttime" data-format="dd/MM/yyyy hh:mm:ss" >
-        </div>
+        <input type="text" class="ipt" id="txtStarttime" name="starttime" data-format="dd/MM/yyyy hh:mm:ss" >
 
         <label>End time:</label>
-        <div class="date input-append" id="end-datetimepicker" data-date="12-02-2012">
-          <input type="text" class="ipt" id="txtEndtime" name="endtime" data-format="dd/MM/yyyy hh:mm:ss" >
-        </div>
+        <input type="text" class="ipt" id="txtEndtime" name="endtime" data-format="dd/MM/yyyy hh:mm:ss" >
 
-        <div><button class="btn">Search</button></div>
+        <div><button class="btn">サーチ</button></div>
       </form>
       <!-- HTML for setting -->
       <div class="setting-panel">
@@ -53,7 +47,7 @@
   <!-- Js for plugins -->
   <script src="plugins/cesium/Build/Cesium/Cesium.js"></script>
   <script src="plugins/jquery/jquery.min.js"></script>
-  <!-- <script type="text/javascript" src="plugins/datepicker/js/bootstrap-datetimepicker.min.js"></script> -->
+  <script src="plugins/datepicker/jquery.datetimepicker.full.min.js"></script>
 
   <script src="js/object/user.js"></script>
   <script src="js/object/earth.js"></script>

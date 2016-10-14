@@ -14,10 +14,10 @@ class User extends Db{
 	*/
 	function __construct(){
 		try{
-			$host = "localhost";
-			$dbname = "viewer";
-			$username = "root";
-			$password = "";
+			$host = "localhost";//"103.18.6.177";
+			$dbname = "viewer";//"inamlim9_viewer";
+			$username = "root";//"inamlim9_viewer";
+			$password = ""; //"Tltttml14112109";
 
 			if(!$this->connect("mysql:host={$host};dbname={$dbname}", $username, $password)){
 				throw new Exception("Cannot connect to db", 1);

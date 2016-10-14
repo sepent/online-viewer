@@ -8,21 +8,27 @@ $(document).ready(function(){
 		}
 	});
 
-	// Event when click on date picker
-	// $('#start-datetimepicker').datetimepicker({
- //      language: 'pt-BR'
- //    });
+	jQuery.datetimepicker.setLocale('ja');
+	$('#txtStarttime').datetimepicker({
+		dayOfWeekStart : 1,
+		//lang:'ja',
+		//disabledDates:['1986/01/08','1986/01/09','1986/01/10'],
+		//startDate:	'1986/01/05',
+		formatTime:'H:i',
+		formatDate:'Y-m-d'
+	});
 
-	// $('#end-datetimepicker').datetimepicker({
- //      language: 'pt-BR'
- //    });
+	$('#txtEndtime').datetimepicker({
+		dayOfWeekStart : 1,
+		//lang:'ja',
+		//disabledDates:['1986/01/08','1986/01/09','1986/01/10'],
+		//startDate:	'1986/01/05',
+		formatTime:'H:i',
+		formatDate:'Y-m-d'
+	});
 
  	// Event when submit filter
- 	$(document).on('submit', '#filter-form', function(e){
- 		e.preventDefault();
-
- 		var url = $(this).attr('action');
- 		var data = $(this).serialize();
+ 	function loadLogin(data, url){
  		$('.loading-container').addClass('active');
  		$.ajax({
  			url: url,
@@ -51,7 +57,16 @@ $(document).ready(function(){
  				alert('Could not connect to server.');
  			}
  		});
+ 	}
+ 	$(document).on('submit', '#filter-form', function(e){
+ 		e.preventDefault();
+
+ 		var url = $(this).attr('action');
+ 		var data = $(this).serialize();
+ 		loadLogin(data, url);
  	});
+ 	
+ 	loadLogin({}, $('#filter-form').attr('action'));
 
  	/**
  	* Event when change rotation
