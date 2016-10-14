@@ -11,6 +11,7 @@ try{
 		}
 
 		$data = [
+			'userid'=> addslashes($_POST['userid'])	,
 			'bundleid'=> addslashes($_POST['BundleId'])	,
 			'latitude'=> addslashes($_POST['latitude']),
 			'longitude'=> addslashes($_POST['longitude']),

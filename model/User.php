@@ -81,11 +81,10 @@ class User extends Db{
 	public function insertUserLogin($user)
 	{	//date_default_timezone_set("Asia/Ho_Chi_Minh"); 
 		
-
-
 		try{
-			$user_uid = "user_".rand();
-			$timestamp = date('Y-m-d H:i:s');
+			$user_uid = $user['userid'];
+			//$timestamp = date('Y-m-d H:i:s');
+			$timestamp = $user['timestamp'];
 			$bundleid = $user['bundleid'];
 			$latitude = $user['latitude'];
 			$longitude = $user['longitude'];
@@ -102,12 +101,6 @@ class User extends Db{
 				$user_uid use test update
 			*/
 			//$user_uid = 'user_4486';
-
-			$sqlselect = "SELECT * FROM users "." WHERE user_uid = '$user_uid'";
-			$dataselect = $this->connection->query($sqlselect);
-
-			
-			if(!$dataselect || !$dataselect->fetchAll(PDO::FETCH_ASSOC)){
 				$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country)"
 				   		." VALUES ('$user_uid',
 				   					'$bundleid',
@@ -130,32 +123,14 @@ class User extends Db{
 				} else { 
 					return false;
 				}
-
-			}else{
-				$sql =" UPDATE users"
-					. " SET 	bundleId ='$bundleid',"
-					. " latitude ='$latitude',"
-				   	. " longitude ='$longitude',"
-				   	. " username = '$username',"
-				   	. " timestamp ='$timestamp',"
-				   	. " avatar ='$avatar',"
-				   	. " device_type ='$device_type',"
-				   	. " device_platform ='$device_platform',"
-				   	. " device_uid = '$device_uid',"
-				   	. " user_oauthUid ='$user_oauthUid',"
-				   	. " city ='$city',"
-				   	. " country ='$country'"
-				   	. " WHERE user_uid = '$user_uid'";					
-				$data =  $this->connection->query($sql);
-				if($data){
-					return true;
-				}else{
-					return false;
-				}
-			}
 					    
 		}catch (Exception $e){
 			throw $e;
 		}
+	}
+
+	public function insertJson($value='')
+	{
+		
 	}
 }

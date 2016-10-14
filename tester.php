@@ -8,6 +8,10 @@
 <div class="container">
 				<form action="insertlogin.php" method="post">
 					<div class="form-group">
+					<label>User_Id</label>
+					<input type="text" class="form-control" name="userId" value="user_" >
+					</div>
+					<div class="form-group">
 					<label>BundleId</label>
 					<input type="text" class="form-control" name="BundleId" >
 					</div>
