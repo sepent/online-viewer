@@ -10,13 +10,12 @@
 
 function autoinsert(){
 				var id = Math.floor(Math.random() * 100);
-				var lat= Math.floor(Math.random() * 100);
-				var lon =Math.floor(Math.random() * 100);
+				var latitude = (Math.random() * (180 + 180) - 180).toFixed(6) * 1;
+				var longitude =(Math.random() * (180 + 180) - 180).toFixed(6) * 1;
 
 				var arrayBundid =['com.akademia.ryokou','overfull.net','google.com','apple.com'];
 
 				var rand = arrayBundid[Math.floor(Math.random() * arrayBundid.length)];
-
 
 				var data = {
 							bundleId: rand,
@@ -34,8 +33,8 @@ function autoinsert(){
 								type: 'login',
 							},
 							coords: {
-								latitude: lat+.027764,
-								longitude: lon+5.834160,
+								latitude: latitude,
+								longitude: longitude,
 								timestamp: '2016-01-25T06:59:59.000Z'
 							}
 						};
@@ -49,6 +48,6 @@ function autoinsert(){
 						}
 					});	
 		}
-setInterval(autoinsert, 60000);
+setInterval(autoinsert, 3000);
 	</script>
 </html>
