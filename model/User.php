@@ -7,10 +7,6 @@ class User extends Db{
 	/**
 	* construct method
 	*
-	* @param string $strConnect
-	* @param string $dbname
-	* @param string $username
-	* @param string $password
 	*/
 	function __construct(){
 		try{
@@ -29,7 +25,7 @@ class User extends Db{
 	}
 
 	/**
-	* construct method
+	* selectUserLogin method
 	*
 	* @param string $bundle
 	* @param string $starttime
@@ -71,15 +67,13 @@ class User extends Db{
 	}
 
 	/**
-	* construct method
+	* insertUserLogin method
 	*
-	* @param string $bundle
-	* @param string $starttime
-	* @param string $endtime
+	* @param array $user
 	* @return array
 	*/
-	public function insertUserLogin($user)
-	{	//date_default_timezone_set("Asia/Ho_Chi_Minh"); 
+	public function insertUserLogin($user){	
+		//date_default_timezone_set("Asia/Ho_Chi_Minh"); 
 		
 		try{
 			$user_uid = $user['userid'];
@@ -101,28 +95,28 @@ class User extends Db{
 				$user_uid use test update
 			*/
 			//$user_uid = 'user_4486';
-				$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country)"
-				   		." VALUES ('$user_uid',
-				   					'$bundleid',
-				   					'$latitude',
-				   					'$longitude',
-				   					'$username',
-				   					'$timestamp',
-									'$avatar',
-									'$device_type',
-									'$device_platform',
-									'$device_uid',
-									'$user_oauthUid',
-									'$city',
-									'$country'
-				   					)";
-				$data =  $this->connection->query($sql);
+			$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country)"
+			   		." VALUES ('$user_uid',
+			   					'$bundleid',
+			   					'$latitude',
+			   					'$longitude',
+			   					'$username',
+			   					'$timestamp',
+								'$avatar',
+								'$device_type',
+								'$device_platform',
+								'$device_uid',
+								'$user_oauthUid',
+								'$city',
+								'$country'
+			   					)";
+			$data =  $this->connection->query($sql);
 
-				if ($data) {
-				    return true;
-				} else { 
-					return false;
-				}
+			if ($data) {
+			    return true;
+			} else { 
+				return false;
+			}
 					    
 		}catch (Exception $e){
 			throw $e;

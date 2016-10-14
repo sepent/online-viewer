@@ -10,9 +10,16 @@ function User(data){
 	*/
 	this.point = {
     	position : Cesium.Cartesian3.fromDegrees(this.data.longitude, this.data.latitude),
-    	description: '<img width="100%" height="100px" src="'+ this.data.avatar+'"/>', 
+    	description: '<div class="info-description">'
+                  + '<img src="'+ this.data.avatar+'" style="height: 100px; float: left; margin-right:10px; margin-bottom: 10px;"/>'
+                  + '<div><span>Device:</span> ' + this.data.device_platform + '</div>'
+                  + '<div><span>Longitude:</span> ' + this.data.longitude + '</div>'
+                  + '<div><span>Latitude:</span> ' + this.data.latitude + '</div>'
+                  + '<div><span>Device:</span> ' + this.data.device_platform + '</div>'
+                  + '<div style="clear: both"></div>'
+                  + '</div>', 
     	name: this.data.username,
-    	text: '5',
+    	text: '',
     	billboard : {
         	image : this.data.avatar,
           	width : 20,

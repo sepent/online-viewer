@@ -39,7 +39,7 @@ $(document).ready(function(){
  			// Success handle 
  			success: function(response){
  				$('.loading-container').removeClass('active');
- 				if(response.status){
+ 				if(response.error == 0){
  					//alert(response);
 	 				galaxy.earth.resetUser();
 

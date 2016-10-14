@@ -12,8 +12,8 @@ try{
 
 	$data = $model->selectUserLogin($bundle, $starttime, $endtime);
 
-	echo json_encode(['status' => true, 'users' => $data]);
+	echo json_encode(['error' => 0, 'users' => $data]);
 
 } catch(Exception $e){
-	echo json_encode(['status' => false, 'message' => $e->getMessage()]);
+	echo json_encode(['error' => 1, 'message' => $e->getMessage()]);
 }
