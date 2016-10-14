@@ -80,20 +80,6 @@ class User extends Db{
 	*/
 	public function insertUserLogin($user){			
 		try{
-			$user_uid = $user['userid'];
-			//$timestamp = date('Y-m-d H:i:s');
-			$timestamp = $user['timestamp'];
-			$bundleid = $user['bundleid'];
-			$latitude = $user['latitude'];
-			$longitude = $user['longitude'];
-			$username = $user['username'];
-			$device_type = $user['device_type'];
-			$device_platform = $user['device_platform'];
-			$device_uid = $user['device_uid'];
-			$user_oauthUid = $user['user_oauthUid'];
-			$avatar = $user['avatar'];
-			$city = $user['city'];
-			$country = $user['country'];
 
 			$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country)"
 			   		." VALUES ('{$user['timestamp']}',
