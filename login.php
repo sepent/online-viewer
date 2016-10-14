@@ -46,7 +46,7 @@ try{
 			'username'			=> isset($_POST['user']['username']) ? addslashes($_POST['user']['username']) : '',
 			'device_type'		=> isset($_POST['device']['type']) ? addslashes($_POST['device']['type']) : '',
 			'device_platform'	=> isset($_POST['device']['platform']) ? addslashes($_POST['device']['platform']) : '',
-			'device_uid'		=> isset($_POST['device']['uid']) ? addslashes($_POST['device']['uid']) ? '',
+			'device_uid'		=> isset($_POST['device']['uid']) ? addslashes($_POST['device']['uid']) : '',
 			'user_oauthUid'		=> isset($_POST['user']['oauthUid']) ? addslashes($_POST['user']['oauthUid']) : '',
 			'avatar'			=> isset($_POST['user']['avatar']) ? addslashes($_POST['user']['avatar']) : '',
 			'city'				=> isset($_POST['coords']['city']) ? addslashes($_POST['user']['city']) : '',

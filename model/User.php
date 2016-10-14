@@ -82,7 +82,7 @@ class User extends Db{
 		try{
 
 			$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country)"
-			   		." VALUES ('{$user['timestamp']}',
+			   		." VALUES ('{$user['userid']}',
 			   					'{$user['bundleid']}',
 			   					'{$user['latitude']}',
 			   					'{$user['longitude']}',

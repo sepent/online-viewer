@@ -36,7 +36,7 @@ function autoinsert(){
 						};
 				$.ajax({
 					type: "POST",
-					url: 'insertjson.php',
+					url: 'login.php',
 					data: data,
 					dataType : 'json',
 					success: function(res){
@@ -44,11 +44,6 @@ function autoinsert(){
 						}
 					});	
 		}
-setInterval(autoinsert, 3000);
-
-// var array = [1,2,3,4,5,6,7,8,9,10];
-// var rand = array[Math.floor(Math.random() * array.length)];
-
-// console.log(rand);
+setInterval(autoinsert, 60000);
 	</script>
 </html>
