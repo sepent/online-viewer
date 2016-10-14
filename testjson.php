@@ -49,6 +49,6 @@ function autoinsert(){
 						}
 					});	
 		}
-setInterval(autoinsert, 3000);
+setInterval(autoinsert, 60000);
 	</script>
 </html>
