@@ -1,40 +1,44 @@
-// Earth object
+//--------------------------------------------------
+// earth.js file
+// Cotnains earth object
+//--------------------------------------------------
+
 function Earth(id, config){
+	//--------------------------------------------------
+	// config property
+	// 
+	// Config json data
+	//--------------------------------------------------
 	this.config = config;
-	/**
-	* Id proprety
-	*
-	*/
+	
+	//--------------------------------------------------
+	// id property
+	// id of element on HTML
+	//--------------------------------------------------
 	this.id = id;
 
-	/**
-	* earth property
-	*/
+	//--------------------------------------------------
+	// viewer property
+	// Contains viewer cesium object 
+	//--------------------------------------------------
 	this.viewer = null;
 
-	/**
-	* Point object
-	*
-	*
-	*/
+	//--------------------------------------------------
+	// users property
+	// Contains user objects
+	//--------------------------------------------------
 	this.users = [];
 
-	/**
-	* Image points
-	*
-	*/
-	this.imagePoints = [];
-
-	/*
-	* Rotation
-	*/
+	//--------------------------------------------------
+	// rotation property
+	// Contains rotation cesium object
+	//--------------------------------------------------
 	this.rotation = null;
 
-	/**
-	* Load map js
-	*
-	* 
-	*/
+	//--------------------------------------------------
+	// show method
+	// This method will be show the earth
+	//--------------------------------------------------
 	this.show = function(){
 		// register key bing map
  		Cesium.BingMapsApi.defaultKey = this.config.mapKey;
@@ -45,9 +49,10 @@ function Earth(id, config){
 		this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
 	};
 
-	/**
-	* Rotate method
-	*/
+	//--------------------------------------------------
+	// show method
+	// This method start rotation
+	//--------------------------------------------------
 	this.startRotate = function(times){
 		var scene = this.viewer.scene;
 		var camera = this.viewer.camera;
@@ -73,27 +78,28 @@ function Earth(id, config){
 		scene.globe.enableLighting = true;
 	}
 
-	/**
-	* Stop Rotate method
-	*/
+	//--------------------------------------------------
+	// stopRotate method
+	// This method stop rotation
+	//--------------------------------------------------
 	this.stopRotate = function(){
 		//this.viewer.scene.remove = 0;
 		this.viewer.clock.multiplier = 0;
 		this.viewer.scene.preRender.removeEventListener(this.rotation);
 	}
 
-	/**
-	* Enable lighting
-	*
-	*/
+	//--------------------------------------------------
+	// enableLighting method
+	// enableLighting on earth
+	//--------------------------------------------------
 	this.enableLighting = function(val){
 		this.viewer.scene.globe.enableLighting = val;
 	}
 
-	/**
-	* logout method
-	* This method will be remove this user on earth
-	*/
+	//--------------------------------------------------
+	// logout method
+	// This method remove user on earth
+	//--------------------------------------------------
 	this.logout = function(point){
 		if(this.users[point.user_uid] != undefined){
 			var live = this.users[point.user_uid];
@@ -104,11 +110,10 @@ function Earth(id, config){
 		}
 	};
 
-	/**
-	* login method
-	*
-	* This method will be added user point on the earth
-	*/
+	//--------------------------------------------------
+	// login method
+	// This method will be added user point on the earth
+	//--------------------------------------------------
 	this.login = function(_point){
 		this.logout(_point);
 
@@ -174,10 +179,11 @@ function Earth(id, config){
 		}
 	};
 
-	/**
-	* Reset user
-	* This method will remove all user on earth
-	*/
+
+	//--------------------------------------------------
+	// Reset user method
+	// This method will remove all user on earth
+	//--------------------------------------------------
 	this.resetUser = function(){
 		for (var key in this.users) {
 			this.logout({user_uid: key});
