@@ -1,13 +1,20 @@
+//--------------------------------------------------
+// user.js file
+// 
+// This file contains user object
+//--------------------------------------------------
+
 function User(data){
-    /**
-	* Id proprety
-	*
-	*/
-	this.data = data;
-	/**
-	* point
-	*
-	*/
+    //--------------------------------------------------
+    // data property
+    // This property contains all data of user, include config data
+    //--------------------------------------------------
+    this.data = data;
+	
+    //--------------------------------------------------
+    // point property
+    // contains point data in cesium
+    //--------------------------------------------------
 	this.point = {
     	position : Cesium.Cartesian3.fromDegrees(this.data.longitude, this.data.latitude),
     	description: '<div class="info-description">'
@@ -21,32 +28,27 @@ function User(data){
     	name: this.data.username,
     	text: '',
     	billboard : {
-        	image : this.data.avatar,
-          	width : 20,
-          	height : 20,
-          	// outlineColor : Cesium.Color.WHITE,
-          	// alignedAxis : Cesium.Cartesian3.UNIT_Z,
-          	// rotation : -Cesium.Math.PI_OVER_TWO
-          	//color : new Cesium.Color(1.0, 1.0, 1.0, 0.5)
+            image : this.data.avatar,
+            width : 20,
+            height : 20
         }
+    };
 
-    	// point : {
-     //  		pixelSize : 5,
-     //  		color : Cesium.Color.RED,
-     //  		outlineColor : Cesium.Color.WHITE,
-     //  		outlineWidth : 2
-      	// }
-  };
+    //--------------------------------------------------
+    // entity property
+    // The entity which save on entities of cesium
+    //--------------------------------------------------
+    this.entity = null;
 
-  this.entity = null;
-  /**
-	* lighting timeout
-	*
-	*/
-  this.lightingTimeout = null;
-  /**
-	* logout timeout
-	*
-	*/
-  this.logoutTimeout = null;
+    //--------------------------------------------------
+    // lightingTimeout property
+    // Contain object timeout of lighting
+    //--------------------------------------------------
+    this.lightingTimeout = null;
+  
+    //--------------------------------------------------
+    // logoutTimeout property
+    // Contain timeout object of logout
+    //--------------------------------------------------
+    this.logoutTimeout = null;
 }

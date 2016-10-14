@@ -38,8 +38,8 @@ try{
 
 		// Check and get parameters
 		$requestData = [
-			'userid'			=> addslashes($_POST['user']['uid'])	,
-			'bundleid'			=> addslashes($_POST['bundleId'])	,
+			'userid'			=> addslashes($_POST['user']['uid']),
+			'bundleid'			=> addslashes($_POST['bundleId']),
 			'latitude'			=> addslashes($_POST['coords']['latitude']),
 			'longitude'			=> addslashes($_POST['coords']['longitude']),
 			'timestamp'			=> isset($_POST['coords']['timestamp']) ? date('Y-m-d H:i:s', strtotime($_POST['coords']['timestamp'])) : date('Y-m-d H:i:s'),
