@@ -2,7 +2,7 @@
 @import url(../plugins/cesium/Build/Cesium/Widgets/widgets.css);
 
 /* CSS for filter panel */
-#filter-container{
+/*#filter-container{
 	position: fixed;
 	width: 250px;
 	padding: 5px;
@@ -76,6 +76,16 @@ form label{
 	margin-top: 10px;
 	border-top: 2px solid #ddd;
 }
+
+.more-setting{
+	display: none;
+}
+.more-setting.active{
+	display: block;
+}*/
+
+/* CSS for filter panel - custom -------------*/
+
 
 /* CSS for Check box ------------------------------------------------*/
 /* Base for label styling */

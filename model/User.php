@@ -10,10 +10,10 @@ class User extends Db{
 	*/
 	function __construct(){
 		try{
-			$host = "localhost";//"103.18.6.177";
-			$dbname = "viewer";//"inamlim9_viewer";
-			$username = "root";//"inamlim9_viewer";
-			$password = ""; //"Tltttml14112109";
+			$host = "localhost";
+			$dbname = "viewer";
+			$username = "root";
+			$password = "";
 
 			if(!$this->connect("mysql:host={$host};dbname={$dbname}", $username, $password)){
 				throw new Exception("Cannot connect to db", 1);
@@ -32,14 +32,14 @@ class User extends Db{
 	* @param string $endtime
 	* @return array
 	*/
-	public function selectUserLogin($bundle, $starttime, $endtime){
+	public function selectUserLogin($bundle, $starttime, $endtime, $device, $device_platform){
 		try{
 
 			$sql = "SELECT * FROM users";
 
 			// Check if have bundle name
 			if($bundle){
-				$sql .= " WHERE bundleId LIKE '{$bundle}'";
+				$sql .= " WHERE bundleId LIKE '%{$bundle}%'";
 			} else {
 				$sql .= " WHERE bundleId LIKE '%'";
 			}
@@ -53,6 +53,21 @@ class User extends Db{
 			if($endtime){
 				$sql .= " AND timestamp <= '{$endtime}'";
 			}
+
+			// Check if have device
+			if($device){
+				$sql .= " AND device_type LIKE '{$device}'";
+			}
+
+			// Device flatform
+			if($device_platform){
+				$sql .= " AND device_platform LIKE '{$device_platform}'";
+			}
+
+			// Check if have event
+			// if($event){
+			// 	$sql .= " AND event_type <= '{$event}'";
+			// }
 
 			$sql .= " ORDER BY timestamp DESC";
 
@@ -81,7 +96,7 @@ class User extends Db{
 	public function insertUserLogin($user){			
 		try{
 
-			$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country)"
+			$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country,event_type,event_payload)"
 			   		." VALUES ('{$user['userid']}',
 			   					'{$user['bundleid']}',
 			   					'{$user['latitude']}',
@@ -94,7 +109,9 @@ class User extends Db{
 								'{$user['device_uid']}',
 								'{$user['user_oauthUid']}',
 								'{$user['city']}',
-								'{$user['country']}'
+								'{$user['country']}',
+								'{$user['event_type']}',
+								'{$user['event_payload']}'
 			   					)";
 			$data =  $this->connection->query($sql);
 

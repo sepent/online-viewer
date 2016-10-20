@@ -43,14 +43,16 @@ try{
 			'latitude'			=> addslashes($_POST['coords']['latitude']),
 			'longitude'			=> addslashes($_POST['coords']['longitude']),
 			'timestamp'			=> isset($_POST['coords']['timestamp']) ? date('Y-m-d H:i:s', strtotime($_POST['coords']['timestamp'])) : date('Y-m-d H:i:s'),
-			'username'			=> isset($_POST['user']['username']) ? addslashes($_POST['user']['username']) : '',
-			'device_type'		=> isset($_POST['device']['type']) ? addslashes($_POST['device']['type']) : '',
-			'device_platform'	=> isset($_POST['device']['platform']) ? addslashes($_POST['device']['platform']) : '',
-			'device_uid'		=> isset($_POST['device']['uid']) ? addslashes($_POST['device']['uid']) : '',
-			'user_oauthUid'		=> isset($_POST['user']['oauthUid']) ? addslashes($_POST['user']['oauthUid']) : '',
-			'avatar'			=> isset($_POST['user']['avatar']) ? addslashes($_POST['user']['avatar']) : '',
-			'city'				=> isset($_POST['coords']['city']) ? addslashes($_POST['user']['city']) : '',
-			'country'			=> isset($_POST['coords']['country']) ? addslashes($_POST['user']['country']) : ''
+			'username'			=> isset($_POST['user']['username'])    ? addslashes($_POST['user']['username']) : '',
+			'device_type'		=> isset($_POST['device']['type']) 		? addslashes($_POST['device']['type']) : '',
+			'device_platform'	=> isset($_POST['device']['platform'])  ? addslashes($_POST['device']['platform']) : '',
+			'device_uid'		=> isset($_POST['device']['uid']) 		? addslashes($_POST['device']['uid']) : '',
+			'user_oauthUid'		=> isset($_POST['user']['oauthUid']) 	? addslashes($_POST['user']['oauthUid']) : '',
+			'avatar'			=> isset($_POST['user']['avatar']) 		? addslashes($_POST['user']['avatar']) : '',
+			'city'				=> isset($_POST['coords']['city']) 		? addslashes($_POST['user']['city']) : '',
+			'country'			=> isset($_POST['coords']['country'])	? addslashes($_POST['user']['country']) : '',
+			'event_type'		=> isset($_POST['event']['type']) 		? addslashes($_POST['event']['type']) : '',
+			'event_payload'		=> isset($_POST['event']['payload ']) 	? addslashes($_POST['event']['payload']) : ''
 		];
 
 		// Call method to save data

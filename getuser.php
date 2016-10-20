@@ -19,10 +19,16 @@ try{
 
 	$endtime = isset($_GET['endtime']) ? addslashes($_GET['endtime']) : '';
 
-	$data = $model->selectUserLogin($bundle, $starttime, $endtime);
+	$deviceType = isset($_GET['deviceType']) ? addslashes($_GET['deviceType']) : '';
+
+	$deviceFlatform = isset($_GET['deviceFlatform']) ? addslashes($_GET['deviceFlatform']) : '';
+
+	$data = $model->selectUserLogin($bundle, $starttime, $endtime, $deviceType, $deviceFlatform);
 
 	echo json_encode(['error' => 0, 'users' => $data]);
 
+} catch(PDOException $e) {
+	echo json_encode(['error' => 1, 'message' => 'Have error when access database, please try again!']);
 } catch(Exception $e){
 	echo json_encode(['error' => 1, 'message' => $e->getMessage()]);
 }

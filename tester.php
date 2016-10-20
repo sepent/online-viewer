@@ -64,15 +64,27 @@
 
 			var arrayBundid =['com.akademia.ryokou','overfull.net','google.com','apple.com'];
 
+			var arrayAvatar = [
+							  'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/TUX-G2-SVG.svg/610px-TUX-G2-SVG.svg',
+							  'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Map_marker.svg/2000px-Map_marker.svg.png',
+							  'https://www.w3.org/TR/SVG-access/tiger.png',
+							  'https://scontent-hkg3-1.xx.fbcdn.net/t31.0-8/11034400_820924321288648_8126060411202343388_o.jpg',
+							  'http://cdn.osxdaily.com/wp-content/uploads/2013/07/dancing-banana.gif',
+							  'https://upload.wikimedia.org/wikipedia/commons/8/84/Konqi_svg.svg',
+							  'http://media.giphy.com/media/109Ku3hdapZJle/giphy.gif'
+
+							];
+
 			var rand = arrayBundid[Math.floor(Math.random() * arrayBundid.length)];
+			var avatar = arrayAvatar[Math.floor(Math.random() * arrayAvatar.length)];
 
 			var data = {
 				bundleId: rand,
 				user: {
 						uid: 'user_'+id,
 						username:'username'+id,
-						avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Map_marker.svg/2000px-Map_marker.svg.png'
-				},
+						avatar: avatar
+					},
 				device: {
 					type: 'mobile',
 					platform: 'ios',
@@ -80,6 +92,7 @@
 				},
 				event: {
 					type: 'login',
+					payload: 'object'
 				},
 				coords: {
 					latitude: latitude,

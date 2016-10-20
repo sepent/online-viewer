@@ -100,14 +100,20 @@ function Earth(id, config){
 	// logout method
 	// This method remove user on earth
 	//--------------------------------------------------
-	this.logout = function(point){
-		if(this.users[point.user_uid] != undefined){
-			var live = this.users[point.user_uid];
-			window.clearTimeout(this.users[point.user_uid].lightingTimeout);
-			window.clearTimeout(this.users[point.user_uid].logoutTimeout);
-			this.viewer.entities.remove(live.entity);
-			this.users[point.user_uid] = undefined;
+	this.logout = function(filter, user){
+		if(this.users[filter] == undefined){
+			return;
 		}
+
+		if(this.users[filter][user] == undefined){
+			return;
+		}
+
+		var entity = this.users[filter][user].entity;
+		//window.clearTimeout(this.users[filter][user].lightingTimeout);
+		//window.clearTimeout(this.users[filter][user].logoutTimeout);
+		this.viewer.entities.remove(entity);
+		delete this.users[filter][user];
 	};
 
 	//--------------------------------------------------
@@ -115,68 +121,80 @@ function Earth(id, config){
 	// This method will be added user point on the earth
 	//--------------------------------------------------
 	this.login = function(_point){
-		this.logout(_point);
+		this.logout(_point.filter, _point.user_uid);
 
 		var user = new User(_point);
 
 		var point = user.point;
 
-		var status = 'logout';
+		user.entity = this.viewer.entities.add(point);
 
-    	var opacity = 0;
-
-    	var times = 0;
-
-    	var parent = this;
-
-    	function logoutAffter(){
-			parent.logout(_point);
+		if(this.users[_point.filter] == undefined){
+			this.users[_point.filter] = {};
 		}
 
-		function effectLighting(){
-			parent.logout(_point);
+		this.users[_point.filter][_point.user_uid] = user;
 
-			if(opacity <= 0){
-				status = 'logout';
-			}
+		// if(this.config.logouttime != false){
+		// 	this.users[_point.user_uid].logoutTimeout = window.setTimeout(logoutAffter, this.config.logouttime);
+		// }
 
-			if(opacity >= 1){
-				status = 'login';
-			}
+		// var status = 'logout';
 
-			if(status == 'login'){
-				opacity -= 0.1;
-				point.billboard.color = new Cesium.Color(1, 1, 1, opacity);
-				user.entity = parent.viewer.entities.add(point);				
-			} else {
-				opacity += 0.1;
-				point.billboard.color = new Cesium.Color(1, 1, 1, opacity);
-				user.entity = parent.viewer.entities.add(point);
-				times++;
-			}
+    	// var opacity = 0;
 
-			parent.users[_point.user_uid] = user;
+    	// var times = 0;
 
-			if(!(times > 25 && opacity >= 1)){
-				parent.users[_point.user_uid].lightingTimeout = window.setTimeout(effectLighting, parent.config.speedlighting);
-			} else {
-				if(parent.config.logouttime != false){
-					parent.users[_point.user_uid].logoutTimeout = window.setTimeout(logoutAffter, parent.config.logouttime);
-				}
-			}
-		}
+  		// var parent = this;
 
-		if(this.config.speedlighting == false){
-			point.billboard.color = new Cesium.Color(1, 1, 1, 1);
-			user.entity = this.viewer.entities.add(point);
-			this.users[_point.user_uid] = user;
+  		// function logoutAffter(){
+		// 	parent.logout(_point);
+		// }
 
-			if(this.config.logouttime != false){
-				this.users[_point.user_uid].logoutTimeout = window.setTimeout(logoutAffter, this.config.logouttime);
-			}
-		} else {
-			effectLighting();
-		}
+		// function effectLighting(){
+		// 	parent.logout(_point);
+
+		// 	if(opacity <= 0){
+		// 		status = 'logout';
+		// 	}
+
+		// 	if(opacity >= 1){
+		// 		status = 'login';
+		// 	}
+
+		// 	if(status == 'login'){
+		// 		opacity -= 0.1;
+		// 		point.billboard.color = new Cesium.Color(1, 1, 1, opacity);
+		// 		user.entity = parent.viewer.entities.add(point);				
+		// 	} else {
+		// 		opacity += 0.1;
+		// 		point.billboard.color = new Cesium.Color(1, 1, 1, opacity);
+		// 		user.entity = parent.viewer.entities.add(point);
+		// 		times++;
+		// 	}
+
+		// 	parent.users[_point.user_uid] = user;
+
+		// 	if(!(times > 25 && opacity >= 1)){
+		// 		parent.users[_point.user_uid].lightingTimeout = window.setTimeout(effectLighting, parent.config.speedlighting);
+		// 	} else {
+		// 		if(parent.config.logouttime != false){
+		// 			parent.users[_point.user_uid].logoutTimeout = window.setTimeout(logoutAffter, parent.config.logouttime);
+		// 		}
+		// 	}
+		// }
+
+		// if(this.config.speedlighting == false){
+		// 	//point.billboard.color = new Cesium.Color(1, 1, 1, 1);
+		// 	user.entity = this.viewer.entities.add(point);
+		// 	this.users[][_point.user_uid] = user;
+
+		// 	if(this.config.logouttime != false){
+		// 		this.users[_point.user_uid].logoutTimeout = window.setTimeout(logoutAffter, this.config.logouttime);
+		// 	}
+		// } else {
+		// 	effectLighting();
+		// }
 	};
 
 
@@ -184,9 +202,32 @@ function Earth(id, config){
 	// Reset user method
 	// This method will remove all user on earth
 	//--------------------------------------------------
-	this.resetUser = function(){
+	this.logoutAllUser = function(){
 		for (var key in this.users) {
-			this.logout({user_uid: key});
+			for (var user in this.users[key]) {
+				this.logout(key, this.users[key][user].data.user_uid);
+			}
 		}
+	};
+
+	//--------------------------------------------------
+	// Reset user method
+	// This method will remove all user on earth
+	//--------------------------------------------------
+	this.logoutFilterUser = function(filter){
+		for (var key in this.users[filter]) {
+			this.logout(filter, this.users[filter][key].data.user_uid);
+		}
+	};
+
+	//--------------------------------------------------
+	// flyTo method
+	//--------------------------------------------------
+	this.flyTo = function(filter, user){
+		this.viewer.camera.setView({
+            destination : Cesium.Cartesian3.fromDegrees(parseFloat(this.users[filter][user].data.longitude) ,parseFloat(this.users[filter][user].data.latitude) ,Cesium.Ellipsoid.WGS84.cartesianToCartographic(this.viewer.camera.position).height)   
+    	});
+
+    	this.viewer.selectedEntity = this.users[filter][user].entity;
 	}
 }
