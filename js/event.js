@@ -10,10 +10,12 @@ $(document).ready(function(){
 	// Event when click on show button
 	//--------------------------------------------------
 	$('.btn-show').click(function(){
-		if($('#filter-container').hasClass('active')){
-			$('#filter-container').removeClass('active');
+		if($('#panel-container').hasClass('active')){
+			$('#panel-container').removeClass('active');
+			$(this).html('<i class="glyphicon glyphicon-chevron-right"></i>');
 		} else {
-			$('#filter-container').addClass('active');
+			$('#panel-container').addClass('active');
+			$(this).html('<i class="glyphicon glyphicon-chevron-left"></i>');
 		}
 	});
 
@@ -295,5 +297,19 @@ $(document).ready(function(){
  		var filter = $(this).attr('data-filter');
  		var user = $(this).attr('data-user');
  		galaxy.earth.flyTo(filter, user);
- 	})
+ 	});
+
+
+ 	function loadScreen(){
+ 		var containerHeight = $('#panel-container').height();
+	 	$('#filter-panel').css({height: (containerHeight/2) + 'px'});
+	 	var controlHeight = parseFloat($('#filter-panel .filter-controls').css('height').replace('px', ''));
+	 	$('#filter-panel .filter-content').css({height: (containerHeight/2 - controlHeight - 10) + 'px'});
+	 	$('#event-panel').css({height: (containerHeight/2) + 'px'});
+ 	}
+ 	loadScreen();
+
+ 	$( window ).resize(function() {
+	  loadScreen();
+	});
 });

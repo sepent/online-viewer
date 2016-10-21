@@ -26,7 +26,7 @@
 
         <!-- HTML for filter panel -->
         <div id="panel-container" class="active">
-            <button class="btn-show"><i class="glyphicon glyphicon-chevron-right"></i></button>
+            <button class="btn-show"><i class="glyphicon glyphicon-chevron-left"></i></button>
 
             <div id="filter-panel">
                 <div class="filter-content">
@@ -68,8 +68,10 @@
                     </ul>
                 </div>
                 <div class="filter-controls">
-                    <button class="btn btn-primary btn-block add-filter-btn"  type="button" data-toggle="modal" data-target="#filterModal">Add new filter</button>
-                    <button class="btn btn-primary btn-block reload-filter-btn"  type="button">Reload event list</button>
+                    <div class="btn-group" style="width: 100%">
+                        <button class="btn btn-primary add-filter-btn"  type="button" data-toggle="modal" data-target="#filterModal" style="width: 50%"><i class="glyphicon glyphicon-edit"></i> Add filter</button>
+                        <button class="btn btn-default reload-filter-btn"  type="button" style="width: 50%"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
+                    </div>
                 </div>
             </div>
 
@@ -100,10 +102,6 @@
                             <input type="hidden" name="checked" value="true">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <!-- <div class="form-group">
-                                      <label for="filter-color">Filter's color</label>
-                                      <input type="text" id="filter-color" class="form-control demo" data-control="hue" value="#ff6161" name="color">
-                                  </div> -->
                                     <div id="filter-color" class="input-group colorpicker-component">
                                         <input type="text" value="rgba(1,1,1,1)" class="form-control" name="color"/>
                                         <span class="input-group-addon"><i></i></span>
@@ -164,35 +162,6 @@
         <script src="js/event.js"></script>
         <script src="js/function.js"></script>
         <script type="text/javascript">
-// $(function(){
-//   var colpick = $('.demo').each( function() {
-//     $(this).minicolors({
-//       control: $(this).attr('data-control') || 'hue',
-//       inline: $(this).attr('data-inline') === 'true',
-//       letterCase: 'lowercase',
-//       opacity: false,
-//       change: function(hex, opacity) {
-//         if(!hex) return;
-//         if(opacity) hex += ', ' + opacity;
-//         try {
-//           console.log(hex);
-//         } catch(e) {}
-//         $(this).select();
-//       },
-//       theme: 'bootstrap'
-//     });
-//   });
-  
-//   var $inlinehex = $('#inlinecolorhex h3 small');
-//   $('#inlinecolors').minicolors({
-//     inline: true,
-//     theme: 'bootstrap',
-//     change: function(hex) {
-//       if(!hex) return;
-//       $inlinehex.html(hex);
-//     }
-//   });
-// });
 </script>
     </body>
 </html>
