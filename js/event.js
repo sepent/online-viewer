@@ -106,9 +106,10 @@ $(document).ready(function(){
 	//--------------------------------------------------
  	function deleteFilter(key){
  		var cookies = JSON.parse($.cookie("filters"));
+ 		// cookies[key].checked = 'false';
+ 		// loadLogin(cookies[key]);
 
- 		cookies[key].checked = 'false';
- 		loadLogin(cookies[key]);
+ 		galaxy.earth.logoutFilterUser(key);
 
  		delete cookies[key];
 
