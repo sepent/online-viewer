@@ -92,3 +92,24 @@ ALTER TABLE `users`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+--  POSGRES
+-- CREATE TABLE users (
+--   id SERIAL,
+--   user_uid varchar(25) NOT NULL,
+--   bundleId varchar(50) NOT NULL,
+--   latitude decimal(15,6) NOT NULL,
+--   longitude decimal(15,6) NOT NULL,
+--   username varchar(50) NOT NULL,
+--   user_oauthUid varchar(50) NOT NULL,
+--   city varchar(50) NOT NULL,
+--   country varchar(50) NOT NULL,
+--   timestamp timestamp NOT NULL DEFAULT '1970-01-01 00:00:00',
+--   device_type varchar(10) NOT NULL,
+--   device_platform varchar(20) NOT NULL,
+--   device_uid varchar(50) NOT NULL,
+--   event_type varchar(20) NOT NULL,
+--   avatar varchar(100) NOT NULL,
+--   event_payload text NOT NULL
+-- )

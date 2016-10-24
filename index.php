@@ -63,7 +63,7 @@
 
         
 
-        <div class="loading-container">Loading...</div>
+        <div class="loading-container"><img src="images/bg-loading.gif"></div>
 
         <!-- Model add new filter -->
         <div class="modal fade adding-filter-box" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

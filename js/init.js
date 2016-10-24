@@ -10,7 +10,7 @@ var galaxy = null;
 
 $(document).ready(function(){
 	// Show loading effect
-	$('.loading-container').addClass('active');
+	loading(true);
 
 	/*--------------------------------------------------
 	Call ajax get setting json file
@@ -60,7 +60,7 @@ $(document).ready(function(){
 		galaxy.earth.show();
 
 		// Hide loading
-		$('.loading-container').removeClass('active');
+		loading(false);
 
 		//actionSettings();
 

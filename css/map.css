@@ -88,6 +88,9 @@ body {
 	color: #fff;
 	display: none;
 }
+.loading-container img{
+  height: 20px;
+}
 .loading-container.active{
 	display: block;
 }

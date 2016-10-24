@@ -10,12 +10,13 @@ class User extends Db{
 	*/
 	function __construct(){
 		try{
-			$host = "localhost";
-			$dbname = "viewer";
-			$username = "root";
-			$password = "";
+			$host = "ec2-54-225-64-254.compute-1.amazonaws.com";
+			$dbname = "dd7lp4mpjcpf1f";
+			$username = "bolnwoylarherg";
+			$password = "6miwdS4HqZYBN780ngc_2g4CVA";
+			$type = "pgsql";
 
-			if(!$this->connect("mysql:host={$host};dbname={$dbname}", $username, $password)){
+			if(!$this->connect("{$type}:host={$host};dbname={$dbname}", $username, $password)){
 				throw new Exception("Cannot connect to db", 1);
 			}
 

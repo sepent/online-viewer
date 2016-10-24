@@ -59,8 +59,7 @@ function loadLogin(data){
 
 	var url = 'getuser.php';
 	// Show loading effect
-	$('.loading-container').addClass('active');
-
+	loading(true);
 	$.ajax({
 		url: url,
 		data: data,
@@ -70,7 +69,7 @@ function loadLogin(data){
 		// Success handle 
 		success: function(response){
 			// Hide loading effect
-			$('.loading-container').removeClass('active');
+			loading(false);
 			if(response.error == 0){
 				//alert(response);
 				galaxy.earth.logoutFilterUser(data.id);
@@ -116,7 +115,7 @@ function loadLogin(data){
 		// Error handle
 		error: function(){
 			// Hide loading effect
-			$('.loading-container').removeClass('active');
+			loading(false);
 			alert('Could not connect to server.');
 		}
 	});
@@ -146,4 +145,12 @@ function sortLogin(){
 	    return +b.getAttribute('data-date') - +a.getAttribute('data-date');
 	})
 	.appendTo('#event-panel .event-content ul');
+}
+
+function loading(show){
+	if(show){
+		$('.loading-container').addClass('active');
+	} else {
+		$('.loading-container').removeClass('active');
+	}
 }
