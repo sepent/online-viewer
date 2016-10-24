@@ -133,8 +133,7 @@ function Earth(id, config){
 			this.users[_point.filter] = {};
 		}
 
-		this.users[_point.filter][_point.user_uid] = user;
-
+		this.users[_point.filter][window.btoa(_point.user_uid+'_'+_point.longitude+'_'+_point.latitude+'_'+_point.timestamp)]  = user;
 		// if(this.config.logouttime != false){
 		// 	this.users[_point.user_uid].logoutTimeout = window.setTimeout(logoutAffter, this.config.logouttime);
 		// }
@@ -216,7 +215,7 @@ function Earth(id, config){
 	//--------------------------------------------------
 	this.logoutFilterUser = function(filter){
 		for (var key in this.users[filter]) {
-			this.logout(filter, this.users[filter][key].data.user_uid);
+			this.logout(filter, key);
 		}
 	};
 
@@ -227,6 +226,12 @@ function Earth(id, config){
 		this.viewer.camera.setView({
             destination : Cesium.Cartesian3.fromDegrees(parseFloat(this.users[filter][user].data.longitude) ,parseFloat(this.users[filter][user].data.latitude) ,Cesium.Ellipsoid.WGS84.cartesianToCartographic(this.viewer.camera.position).height)   
     	});
+  		// var maxRadii = this.viewer.scene.globe.ellipsoid.maximumRadius;
+  		// var position = new Cesium.Cartesian3(parseFloat(this.users[filter][user].data.longitude), parseFloat(this.users[filter][user].data.latitude));
+	   //    Cesium.Cartesian3.multiplyByScalar(Cesium.Cartesian3.normalize(position, position), 5 * maxRadii, position);
+	   //    this.viewer.scene.camera.flyTo({
+	   //       destination : position,
+	   //    });
 
     	this.viewer.selectedEntity = this.users[filter][user].entity;
 	}

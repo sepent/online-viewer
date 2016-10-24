@@ -2,9 +2,19 @@
 // actionSettings function
 //--------------------------------------------------
 function actionSettings(){
-	if($('#cbx-rotation').is(":checked")){
-		var rotation = $('#txtRotation').val();
+	var isRotate = $('#cbx-rotation').is(":checked");
+	var rotation = $('#txtRotation').val();
+	var isLighting = $('#cbx-lighting').is(":checked");
+	var cookie = {
+		rotationSpeed: rotation,
+		isRotate: isRotate,
+		isLighting: isLighting
+	};
 
+	$.cookie('settings', JSON.stringify(cookie));
+
+	if(isRotate){
+		
 		if(isNaN(rotation) || rotation > 99999999 || rotation < 0){
 			alert('Rotational speed is invalid');
 			return;
@@ -15,7 +25,19 @@ function actionSettings(){
 		galaxy.earth.stopRotate();
 	}
 
-	galaxy.earth.enableLighting($('#cbx-lighting').is(":checked"));
+	galaxy.earth.enableLighting(isLighting);
+}
+
+
+function loadSettings(){
+	var cookie = $.cookie('settings');
+	if(cookie != undefined && cookie != ''){
+		var cookie = JSON.parse(cookie) ;
+		$('#txtRotation').val(cookie.rotationSpeed != undefined ? cookie.rotationSpeed : '');
+		$('#cbx-rotation').prop('checked', cookie.isRotate != undefined ? cookie.isRotate : false);
+		$('#cbx-lighting').prop('checked', cookie.isLighting != undefined ? cookie.isLighting : false);
+		actionSettings();
+	}
 }
 
 //--------------------------------------------------
@@ -65,7 +87,7 @@ function loadLogin(data){
 
 			        galaxy.earth.login(value);
 
-					$(ul).append('<li class="list-group-item" data-filter="'+data.id+'" data-user="'+value.user_uid+'">'
+					$(ul).append('<li class="list-group-item" data-filter="'+data.id+'" data-user="'+window.btoa(value.user_uid+'_'+value.longitude+'_'+value.latitude+'_'+value.timestamp)+'" data-date="'+(new Date(value.timestamp)).getTime()+'">'
                             + '<span class="color-label" style="background: '+data.color+'"></span>'
                             + '<div class="event-row">'
                             + '<div>Bundle ID: '+value.bundleId+'</div>'
@@ -73,7 +95,7 @@ function loadLogin(data){
                             + '<div>Timestamp: '+value.timestamp+'</div>'
                             + '</div>'
                         	+ '</li>');
-
+					sortLogin();
 				});
 				
 				//$('.counter').text(response.users.length + ' result(s) is found');
@@ -105,4 +127,14 @@ function refreshLogin(){
 	for(var data in filters){
 		loadLogin(filters[data]);
 	}
+}
+
+//--------------------------------------------------
+// loadLogin function
+//--------------------------------------------------
+function sortLogin(){
+	$('#event-panel .event-content ul > li').sort(function(a, b) {
+	    return +b.getAttribute('data-date') - +a.getAttribute('data-date');
+	})
+	.appendTo('#event-panel .event-content ul');
 }

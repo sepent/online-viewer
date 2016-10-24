@@ -198,6 +198,7 @@ $(document).ready(function(){
 	//--------------------------------------------------
  	$(document).on('click', '.filter-content ul .btn-edit', function(e){
  		e.preventDefault();
+ 		$('#filterModal .title').text('Edit filter');
  		var key = $(this).closest('li').attr('data-key');
  		editFilter(key);
  	});
@@ -234,6 +235,8 @@ $(document).ready(function(){
  		$('#filter-form').get(0).reset();
  		$('#filter-form input[name="id"]').val('');
  		$('#filter-form input[name="checked"]').val('true');
+ 		$('#filterModal .title').text('Add new filter');
+ 		$('#filter-color').colorpicker('setValue', 'rgba(1,1,1,1)');
  	});
 
  	// Event when click on add-filter-btn
@@ -274,19 +277,19 @@ $(document).ready(function(){
  		actionSettings();
  	});
 
-
+ 	loadSettings();
  	//--------------------------------------------------
  	// Event click show more setting
  	//
  	//--------------------------------------------------
- 	$(document).on('click', '.btn-show-more-setting', function(){
- 		if($('.more-setting').hasClass('active')){
- 			$('.more-setting').removeClass('active')
+ 	$(document).on('click', '.setting-btn', function(){
+ 		if($('.setting-panel').hasClass('active')){
+ 			$('.setting-panel').removeClass('active')
  			
- 			$(this).text('Show more settings');
+ 			$(this).html('<i class="glyphicon glyphicon-cog"></i> Show settings');
  		} else {
- 			$('.more-setting').addClass('active')
- 			$(this).text('Hide settings');
+ 			$('.setting-panel').addClass('active')
+ 			$(this).html('<i class="glyphicon glyphicon-cog"></i> Hide settings');
  		}
  	});
 
@@ -308,6 +311,7 @@ $(document).ready(function(){
 	 	$('#filter-panel .filter-content').css({height: (containerHeight/2 - controlHeight - 10) + 'px'});
 	 	$('#event-panel').css({height: (containerHeight/2) + 'px'});
  	}
+
  	loadScreen();
 
  	$( window ).resize(function() {

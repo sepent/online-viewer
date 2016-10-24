@@ -123,6 +123,27 @@ ul.list-group li:hover .action-group{
 	margin-top: 5px;
 }
 
+/*CSS for setting panel*/
+#filter-panel .filter-content{
+	position: relative;
+	overflow: hidden;
+}
+
+#filter-panel .filter-content .setting-panel{
+	position: absolute;
+	bottom: -100%;
+	left: 0;
+	width: 100%;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 5px;
+	transition: all 0.3s ease;
+}
+
+#filter-panel .filter-content .setting-panel.active{
+	bottom: -100%;
+	bottom: 0;
+}
 /* --------------------------------------------------------------------- 
 	CSS for user list panel  
 /* --------------------------------------------------------------------- */

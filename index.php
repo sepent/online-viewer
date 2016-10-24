@@ -30,47 +30,24 @@
 
             <div id="filter-panel">
                 <div class="filter-content">
-                    <!-- <form action="getuser.php" method="post" id="filter-form">
-                        <label for="">BundleId:</label>
-                        <input type="text" class="ipt" id="txtBundle" name="bundleId">
-
-                        <label>Start Time:</label>
-                        <input type="text" class="ipt" id="txtStarttime" name="starttime" data-format="dd/MM/yyyy hh:mm:ss" >
-
-                        <label>End time:</label>
-                        <input type="text" class="ipt" id="txtEndtime" name="endtime" data-format="dd/MM/yyyy hh:mm:ss" >
-
-                        <label>Device type:</label>
-                        <input type="text" class="ipt" id="txtDevicetype" name="deviceType" >
-
-                        <label>Event flatform:</label>
-                        <input type="text" class="ipt" id="txtDeviceFlatform" name="deviceFlatform">
-
-                        <div><button class="btn">Search</button></div>
-                        <div class="counter"></div>
-                    </form>-->
-
-                    <!-- HTML for setting -->
-                    <!-- <div class="setting-panel">
-                        <a href="javascript: void(0)" class="btn-show-more-setting">Show more settings</a>
-                        <div class="more-setting">
-                            <label for="">Rotational speed:</label>
-                            <input type="text" class="ipt" id="txtRotation" name="txtRotation">
-                            <div><input type="checkbox" class="cbx" id="cbx-rotation"> <label for="cbx-rotation">Rotation</label></div>
-                            <div><input type="checkbox" class="cbx" id="cbx-lighting"> <label for="cbx-lighting">Enable lighting</label></div>
-                            <div><input type="checkbox" class="cbx" id="cbx-fullscreen"> <label for="cbx-fullscreen">Full sreen button</label></div>
-                            <div><input type="checkbox" class="cbx" id="cbx-infobox"> <label for="cbx-infobox">Info box</label></div>
-                            <div><input type="checkbox" class="cbx" id="cbx-animation"> <label for="cbx-animation">Animation</label></div>
-                        </div>
-                    </div> -->
                     <ul class="list-group">
                         <li id="message-filter">No filter is setted</li>
                     </ul>
+                    <div class="setting-panel">
+                        <label for="">Rotational speed:</label>
+                        <input type="text" class="ipt form-control" id="txtRotation" name="txtRotation">
+                        <div><input type="checkbox" class="cbx" id="cbx-rotation"> <label for="cbx-rotation">Rotation</label></div>
+                        <div><input type="checkbox" class="cbx" id="cbx-lighting"> <label for="cbx-lighting">Enable lighting</label></div>
+                        <!-- <div><input type="checkbox" class="cbx" id="cbx-fullscreen"> <label for="cbx-fullscreen">Full sreen button</label></div>
+                        <div><input type="checkbox" class="cbx" id="cbx-infobox"> <label for="cbx-infobox">Info box</label></div>
+                        <div><input type="checkbox" class="cbx" id="cbx-animation"> <label for="cbx-animation">Animation</label></div> -->
+                    </div>
                 </div>
                 <div class="filter-controls">
                     <div class="btn-group" style="width: 100%">
-                        <button class="btn btn-primary add-filter-btn"  type="button" data-toggle="modal" data-target="#filterModal" style="width: 50%"><i class="glyphicon glyphicon-edit"></i> Add filter</button>
-                        <button class="btn btn-default reload-filter-btn"  type="button" style="width: 50%"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
+                        <button class="btn btn-primary add-filter-btn btn-sm"  type="button" data-toggle="modal" data-target="#filterModal" style="width: 50%"><i class="glyphicon glyphicon-edit"></i> Add filter</button>
+                        <button class="btn btn-default setting-btn btn-sm"  type="button" style="width: 50%"><i class="glyphicon glyphicon-cog"></i> Show settings</button>
+                        <button class="btn btn-default reload-filter-btn btn-sm btn-block" style="margin-top: 5px"  type="button"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
                     </div>
                 </div>
             </div>
@@ -94,7 +71,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><i class="glyphicon glyphicon-edit"></i> Add new filter</h4>
+                        <h4 class="modal-title" id="myModalLabel"><i class="glyphicon glyphicon-edit"></i> <span class="title">Add new filter</span></h4>
                     </div>
                     <div class="modal-body">
                         <form action="" method="post" id="filter-form">
