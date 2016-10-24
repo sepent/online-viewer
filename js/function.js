@@ -98,7 +98,7 @@ function loadLogin(data){
 					$(ul).append('<li class="list-group-item" data-filter="'+data.id+'" data-user="'+value.id+'" data-date="'+(new Date(value.timestamp)).getTime()+'">'
                             + '<span class="color-label" style="background: '+data.color+'"></span>'
                             + '<div class="event-row">'
-                            + '<div>Bundle ID: '+value.bundleId+'</div>'
+                            + '<div>Bundle ID: '+value.bundleid+'</div>'
                             + '<div>Event type: '+value.event_type+'</div>'
                             + '<div>Timestamp: '+value.timestamp+'</div>'
                             + '</div>'
