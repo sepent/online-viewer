@@ -109,10 +109,7 @@ function Earth(id, config){
 			return;
 		}
 
-		var entity = this.users[filter][user].entity;
-		//window.clearTimeout(this.users[filter][user].lightingTimeout);
-		//window.clearTimeout(this.users[filter][user].logoutTimeout);
-		this.viewer.entities.remove(entity);
+		this.viewer.entities.remove(this.users[filter][user].entity);
 		delete this.users[filter][user];
 	};
 
@@ -133,7 +130,7 @@ function Earth(id, config){
 			this.users[_point.filter] = {};
 		}
 
-		this.users[_point.filter][window.btoa(_point.user_uid+'_'+_point.longitude+'_'+_point.latitude+'_'+_point.timestamp)]  = user;
+		this.users[_point.filter][_point.id]  = user;
 		// if(this.config.logouttime != false){
 		// 	this.users[_point.user_uid].logoutTimeout = window.setTimeout(logoutAffter, this.config.logouttime);
 		// }
@@ -202,9 +199,9 @@ function Earth(id, config){
 	// This method will remove all user on earth
 	//--------------------------------------------------
 	this.logoutAllUser = function(){
-		for (var key in this.users) {
-			for (var user in this.users[key]) {
-				this.logout(key, this.users[key][user].data.user_uid);
+		for (var filter in this.users) {
+			for (var user in this.users[filter]) {
+				this.logout(key, user);
 			}
 		}
 	};
@@ -214,8 +211,23 @@ function Earth(id, config){
 	// This method will remove all user on earth
 	//--------------------------------------------------
 	this.logoutFilterUser = function(filter){
-		for (var key in this.users[filter]) {
-			this.logout(filter, key);
+		for (var user in this.users[filter]) {
+			var users = $.extend({}, this.users);
+			delete users[filter];
+
+			for (var filterKey in users) {
+		   		for(var userKey in this.users[filterKey]){
+		   			if(this.users[filterKey][userKey].data.longitude == this.users[filter][user].data.longitude
+		   				&& this.users[filterKey][userKey].data.latitude == this.users[filter][user].data.latitude){
+		   				if(this.users[filterKey][userKey].entity != null){
+		   					this.viewer.entities.remove(this.users[filterKey][userKey].entity);
+		   				}
+		   				
+	   					this.users[filterKey][userKey].entity = this.viewer.entities.add(this.users[filterKey][userKey].point);
+		   			}
+		   		}
+		   	}
+		   	this.logout(filter, user);
 		}
 	};
 
@@ -223,16 +235,28 @@ function Earth(id, config){
 	// flyTo method
 	//--------------------------------------------------
 	this.flyTo = function(filter, user){
-		this.viewer.camera.setView({
-            destination : Cesium.Cartesian3.fromDegrees(parseFloat(this.users[filter][user].data.longitude) ,parseFloat(this.users[filter][user].data.latitude) ,Cesium.Ellipsoid.WGS84.cartesianToCartographic(this.viewer.camera.position).height)   
-    	});
-  		// var maxRadii = this.viewer.scene.globe.ellipsoid.maximumRadius;
-  		// var position = new Cesium.Cartesian3(parseFloat(this.users[filter][user].data.longitude), parseFloat(this.users[filter][user].data.latitude));
-	   //    Cesium.Cartesian3.multiplyByScalar(Cesium.Cartesian3.normalize(position, position), 5 * maxRadii, position);
-	   //    this.viewer.scene.camera.flyTo({
-	   //       destination : position,
-	   //    });
 
+	   	var data =  $.extend({}, this.users[filter][user].data);
+
+
+	   	for (var filterKey in this.users) {
+	   		for(var userKey in this.users[filterKey]){
+	   			if(this.users[filterKey][userKey].data.longitude == data.longitude
+	   				&& this.users[filterKey][userKey].data.latitude == data.latitude){
+	   				if(this.users[filterKey][userKey].entity != null){
+		   				this.viewer.entities.remove(this.users[filterKey][userKey].entity);
+	   					this.users[filterKey][userKey].entity = null;
+		   			}
+	   			}
+	   		}
+	   	}
+
+	    this.users[filter][user].entity = this.viewer.entities.add(this.users[filter][user].point);
+
+	   	this.viewer.camera.setView({
+            destination : Cesium.Cartesian3.fromDegrees(parseFloat(data.longitude) ,parseFloat(data.latitude) ,Cesium.Ellipsoid.WGS84.cartesianToCartographic(this.viewer.camera.position).height)   
+    	});
+	   	
     	this.viewer.selectedEntity = this.users[filter][user].entity;
-	}
+	};
 }

@@ -69,7 +69,7 @@ $(document).ready(function(){
  		}
 
  		if(filter.id == ''){
- 			filter.id = window.btoa(Date());
+ 			filter.id = getFilterKey(filter);
 
  			$('#filter-panel .filter-content ul').append(
 	 			'<li class="list-group-item" data-key="'+ filter.id +'">'

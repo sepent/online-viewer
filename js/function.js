@@ -1,3 +1,11 @@
+function getUserKey(data){
+	return window.btoa(data.user_uid+'_'+data.longitude+'_'+data.latitude+'_'+data.timestamp);
+}
+
+function getFilterKey(data){
+	return window.btoa(Date());
+}
+
 //--------------------------------------------------
 // actionSettings function
 //--------------------------------------------------
@@ -80,6 +88,7 @@ function loadLogin(data){
 				response.users.map(function(value){					
 					// load a single image asynchronously
 					value.filter = data.id;
+					value.id = getUserKey(value);
 
 					var rgb = data.color.match(/\d+/g);
 
@@ -87,7 +96,7 @@ function loadLogin(data){
 
 			        galaxy.earth.login(value);
 
-					$(ul).append('<li class="list-group-item" data-filter="'+data.id+'" data-user="'+window.btoa(value.user_uid+'_'+value.longitude+'_'+value.latitude+'_'+value.timestamp)+'" data-date="'+(new Date(value.timestamp)).getTime()+'">'
+					$(ul).append('<li class="list-group-item" data-filter="'+data.id+'" data-user="'+value.id+'" data-date="'+(new Date(value.timestamp)).getTime()+'">'
                             + '<span class="color-label" style="background: '+data.color+'"></span>'
                             + '<div class="event-row">'
                             + '<div>Bundle ID: '+value.bundleId+'</div>'

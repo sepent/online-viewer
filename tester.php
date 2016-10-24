@@ -74,9 +74,16 @@
 							  'http://media.giphy.com/media/109Ku3hdapZJle/giphy.gif'
 
 							];
+			var yeahs = [2014, 2015,2016];
+			var months = ['01','02','03','04','05','06','07','08','09',11,12]
+			var days = ['01','02','03','04','05','06','07','08','09',10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 
 			var rand = arrayBundid[Math.floor(Math.random() * arrayBundid.length)];
 			var avatar = arrayAvatar[Math.floor(Math.random() * arrayAvatar.length)];
+
+			var yeah = yeahs[Math.floor(Math.random() * yeahs.length)];
+			var month = months[Math.floor(Math.random() * months.length)];
+			var day = days[Math.floor(Math.random() * days.length)];
 
 			var data = {
 				bundleId: rand,
@@ -97,7 +104,7 @@
 				coords: {
 					latitude: latitude,
 					longitude: longitude,
-					timestamp: '2016-01-25T06:59:59.000Z'
+					timestamp: ''+yeah+'-'+month+'-'+day+'T06:59:59.000Z'
 				}
 			};
 
