@@ -19,8 +19,8 @@
 		</div>
 		<div style="float: right; border: 1px solid #ddd; padding: 5px; width: 48%;">
 			<form action="insertlogin.php" method="post">
-				<label>BundleId</label>
-				<input type="text" class="form-control" name="bundleId" >
+				<label>bundleid</label>
+				<input type="text" class="form-control" name="bundleid" >
 
 				<label>User_Id</label>
 				<input type="text" class="form-control" name="user[uid]" value="user_" >
@@ -86,7 +86,7 @@
 			var day = days[Math.floor(Math.random() * days.length)];
 
 			var data = {
-				bundleId: rand,
+				bundleid: rand,
 				user: {
 						uid: 'user_'+id,
 						username:'username'+id,

@@ -47,7 +47,6 @@
                     <div class="btn-group" style="width: 100%">
                         <button class="btn btn-primary add-filter-btn btn-sm"  type="button" data-toggle="modal" data-target="#filterModal" style="width: 50%"><i class="glyphicon glyphicon-edit"></i> Add filter</button>
                         <button class="btn btn-default setting-btn btn-sm"  type="button" style="width: 50%"><i class="glyphicon glyphicon-cog"></i> Show settings</button>
-                        <button class="btn btn-default reload-filter-btn btn-sm btn-block" style="margin-top: 5px"  type="button"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
                     </div>
                 </div>
             </div>
@@ -58,6 +57,7 @@
                     <ul class="list-group"></ul>
                 </div>
             </div>
+            <div class="disable-panel"></div>
         </div>
         <!-- END HTML for filter panel -->
 
@@ -86,14 +86,14 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="txtFiltername">Filter's name:</label>
-                                    <input type="text" class="form-control" id="txtFiltername" name="filterName">
+                                    <input type="text" class="form-control" id="txtFiltername" name="filtername">
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="txtBundle">BundleId:</label>
-                                    <input type="text" class="form-control" id="txtBundle" name="bundleId">
+                                    <label for="txtBundle">Bundle Id:</label>
+                                    <input type="text" class="form-control" id="txtBundle" name="bundleid">
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="txtStarttime">Start Time:</label>
+                                    <label for="txtStarttime">Start time:</label>
                                     <input type="text" class="form-control" id="txtStarttime" name="starttime" data-format="dd/MM/yyyy hh:mm:ss" >
                                 </div>
                                 <div class="col-md-12">
@@ -103,12 +103,12 @@
 
                                 <div class="col-md-12">
                                     <label for="txtDevicetype">Device type:</label>
-                                    <input type="text" class="form-control" id="txtDevicetype" name="deviceType" >
+                                    <input type="text" class="form-control" id="txtDevicetype" name="device_type" >
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="txtDeviceFlatform">Event Platform:</label>
-                                    <input type="text" class="form-control" id="txtDeviceFlatform" name="deviceFlatform">
+                                    <label for="txtDeviceFlatform">Event flatform:</label>
+                                    <input type="text" class="form-control" id="txtDeviceFlatform" name="device_flatform">
                                 </div>
                             </div>
                         </form>
@@ -126,6 +126,7 @@
         <script src="plugins/jquery/jquery.min.js"></script>
         <script src="plugins/jquery/jquery.cookie.js"></script>
         <script src="plugins/datepicker/jquery.datetimepicker.full.min.js"></script>
+        <script src="http://localhost:8080/socket.io/socket.io.js"></script>
         <!-- Js for bootstrap -->
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
         <!-- <script src="plugins/bootstrap/color/jquery.minicolors.min.js"></script> -->
@@ -134,11 +135,10 @@
         <script src="js/object/user.js"></script>
         <script src="js/object/earth.js"></script>
         <script src="js/object/galaxy.js"></script>
+        <script src="js/socket.js"></script>
         
+        <script src="js/function.js"></script>
         <script src="js/init.js"></script>
         <script src="js/event.js"></script>
-        <script src="js/function.js"></script>
-        <script type="text/javascript">
-</script>
     </body>
 </html>

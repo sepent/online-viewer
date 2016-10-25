@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `user_uid` varchar(25) NOT NULL,
-  `bundleId` varchar(50) NOT NULL,
+  `bundleid` varchar(50) NOT NULL,
   `latitude` float(15,6) NOT NULL,
   `longitude` float(15,6) NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_uid`, `bundleId`, `latitude`, `longitude`, `username`, `user_oauthUid`, `city`, `country`, `timestamp`, `device_type`, `device_platform`, `device_uid`, `event_type`, `avatar`, `event_payload`) VALUES
+INSERT INTO `users` (`id`, `user_uid`, `bundleid`, `latitude`, `longitude`, `username`, `user_oauthUid`, `city`, `country`, `timestamp`, `device_type`, `device_platform`, `device_uid`, `event_type`, `avatar`, `event_payload`) VALUES
 (169, 'user_40', 'overfull.net', 127.615791, -3.127192, 'username40', '', '', '', '2016-01-25 00:59:59', 'mobile', 'ios', 'device_', '', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Map_marker.svg/2000px-Map_marker.svg.png', ''),
 (170, 'user_72', 'overfull.net', -56.291111, 18.414246, 'username72', '', '', '', '2016-01-25 00:59:59', 'mobile', 'ios', 'device_', '', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Map_marker.svg/2000px-Map_marker.svg.png', ''),
 (171, 'user_31', 'com.akademia.ryokou', -69.153290, 70.827568, 'username31', '', '', '', '2016-01-25 00:59:59', 'mobile', 'ios', 'device_', '', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Map_marker.svg/2000px-Map_marker.svg.png', ''),
@@ -98,7 +98,7 @@ ALTER TABLE `users`
 -- CREATE TABLE users (
 --   id SERIAL,
 --   user_uid varchar(25) NOT NULL,
---   bundleId varchar(50) NOT NULL,
+--   bundleid varchar(50) NOT NULL,
 --   latitude decimal(15,6) NOT NULL,
 --   longitude decimal(15,6) NOT NULL,
 --   username varchar(50) NOT NULL,

@@ -13,6 +13,7 @@
 	left: -250px;
 	transition: all 0.5s ease;
 	height: 100%;
+	z-index: 9999;
 }
 
 #panel-container.active{
@@ -33,6 +34,18 @@
 	border-bottom: 1px solid #ddd;
 }
 
+#panel-container .disable-panel.active{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	background: rgba(1,1,1,0.3);
+	display: block;
+}
+#panel-container .disable-panel{
+	display: none;
+}
 /* Filter content */
 #filter-panel{
 	background: #fff;

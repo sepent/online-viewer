@@ -4,26 +4,6 @@ require 'Db.php';
 * 
 */
 class User extends Db{
-	/**
-	* construct method
-	*
-	*/
-	function __construct(){
-		try{
-			$host = "ec2-54-225-64-254.compute-1.amazonaws.com";
-			$dbname = "dd7lp4mpjcpf1f";
-			$username = "bolnwoylarherg";
-			$password = "6miwdS4HqZYBN780ngc_2g4CVA";
-			$type = "pgsql";
-
-			if(!$this->connect("{$type}:host={$host};dbname={$dbname}", $username, $password)){
-				throw new Exception("Cannot connect to db", 1);
-			}
-
-		} catch(Exception $e){
-			throw $e;
-		}
-	}
 
 	/**
 	* selectUserLogin method
@@ -33,16 +13,22 @@ class User extends Db{
 	* @param string $endtime
 	* @return array
 	*/
-	public function selectUserLogin($bundle, $starttime, $endtime, $device, $device_platform){
+	public function selectUserLogin($bundleid, $starttime, $endtime, $device_type, $device_platform){
 		try{
 
 			$sql = "SELECT * FROM users";
 
 			// Check if have bundle name
-			if($bundle){
-				$sql .= " WHERE bundleId LIKE '%{$bundle}%'";
+			// if($bundleid){
+			// 	$sql .= " WHERE bundleid LIKE '%{$bundleid}%'";
+			// } else {
+			// 	$sql .= " WHERE bundleid LIKE '%'";
+			// }
+			if($bundleid){
+				$bundleid = strtolower($bundleid);
+				$sql .= " WHERE lower(bundleid) similar to '%{$bundleid}%'";
 			} else {
-				$sql .= " WHERE bundleId LIKE '%'";
+				$sql .= " WHERE lower(bundleid) similar to '%'";
 			}
 
 			// Check if have start time
@@ -56,13 +42,21 @@ class User extends Db{
 			}
 
 			// Check if have device
-			if($device){
-				$sql .= " AND device_type LIKE '{$device}'";
+			// if($device_type){
+			// 	$sql .= " AND device_type LIKE '{$device_type}'";
+			// }
+			if($device_type){
+				$device_type = strtolower($device_type);
+				$sql .= " AND lower(device_type) similar to '{$device_type}'";
 			}
 
 			// Device flatform
+			// if($device_platform){
+			// 	$sql .= " AND device_platform LIKE '{$device_platform}'";
+			// }
 			if($device_platform){
-				$sql .= " AND device_platform LIKE '{$device_platform}'";
+				$device_platform = strtolower($device_platform);
+				$sql .= " AND lower(device_platform) similar to '{$device_platform}'";
 			}
 
 			// Check if have event
@@ -97,7 +91,7 @@ class User extends Db{
 	public function insertUserLogin($user){			
 		try{
 
-			$sql = "INSERT INTO users(user_uid,bundleId,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country,event_type,event_payload)"
+			$sql = "INSERT INTO users(user_uid,bundleid,latitude,longitude,username,timestamp,avatar,device_type,device_platform,device_uid,user_oauthUid,city,country,event_type,event_payload)"
 			   		." VALUES ('{$user['userid']}',
 			   					'{$user['bundleid']}',
 			   					'{$user['latitude']}',

@@ -9,9 +9,7 @@
 var galaxy = null;
 
 $(document).ready(function(){
-	// Show loading effect
-	loading(true);
-
+	//$.removeCookie('filters');
 	/*--------------------------------------------------
 	Call ajax get setting json file
 	--------------------------------------------------*/
@@ -60,7 +58,6 @@ $(document).ready(function(){
 		galaxy.earth.show();
 
 		// Hide loading
-		loading(false);
 
 		//actionSettings();
 

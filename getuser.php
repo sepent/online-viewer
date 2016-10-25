@@ -13,17 +13,17 @@ try{
 	$model = new User();
 
 	// Check and get parameter
-	$bundle = isset($_GET['bundleId']) ? addslashes($_GET['bundleId']) : '';
+	$bundle = isset($_GET['bundleid']) ? addslashes($_GET['bundleid']) : '';
 
 	$starttime = isset($_GET['starttime']) ? addslashes($_GET['starttime']) : '';
 
 	$endtime = isset($_GET['endtime']) ? addslashes($_GET['endtime']) : '';
 
-	$deviceType = isset($_GET['deviceType']) ? addslashes($_GET['deviceType']) : '';
+	$device_type = isset($_GET['device_type']) ? addslashes($_GET['device_type']) : '';
 
-	$deviceFlatform = isset($_GET['deviceFlatform']) ? addslashes($_GET['deviceFlatform']) : '';
+	$device_flatform = isset($_GET['device_flatform']) ? addslashes($_GET['device_flatform']) : '';
 
-	$data = $model->selectUserLogin($bundle, $starttime, $endtime, $deviceType, $deviceFlatform);
+	$data = $model->selectUserLogin($bundle, $starttime, $endtime, $device_type, $device_flatform);
 
 	echo json_encode(['error' => 0, 'users' => $data]);
 

@@ -9,6 +9,7 @@
 try{
 	// Import model to access to database
 	require 'model/User.php';
+	require 'weight/socket.io.php';
 
 	// Check if method is post
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -21,8 +22,8 @@ try{
 			return;
 		}
 
-		if(!isset($_POST['bundleId'])){
-			echo json_encode(['error' => 1, 'message' => 'Parameter bundleId is required']);
+		if(!isset($_POST['bundleid'])){
+			echo json_encode(['error' => 1, 'message' => 'Parameter bundleid is required']);
 			return;
 		}
 
@@ -39,7 +40,7 @@ try{
 		// Check and get parameters
 		$requestData = [
 			'userid'			=> addslashes($_POST['user']['uid']),
-			'bundleid'			=> addslashes($_POST['bundleId']),
+			'bundleid'			=> addslashes($_POST['bundleid']),
 			'latitude'			=> addslashes($_POST['coords']['latitude']),
 			'longitude'			=> addslashes($_POST['coords']['longitude']),
 			'timestamp'			=> isset($_POST['coords']['timestamp']) ? date('Y-m-d H:i:s', strtotime($_POST['coords']['timestamp'])) : date('Y-m-d H:i:s'),
@@ -57,6 +58,8 @@ try{
 
 		// Call method to save data
 		if($model->insertUserLogin($requestData)){
+			$socketio = new SocketIO();
+			$socketio->send('localhost', 8080, 'newSign', '');
 		 	echo json_encode(['error' => 0, 'message' => 'Success']);
 		 	return;
 		}

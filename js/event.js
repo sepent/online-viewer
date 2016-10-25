@@ -50,64 +50,14 @@ $(document).ready(function(){
         format: 'rgba'
     });
 
-	//--------------------------------------------------
- 	// Event when submit filter
- 	//--------------------------------------------------
- 	function saveFilter(data){
- 		var filter = {};
-
- 		data.map(function(field){
- 			filter[field.name] = field.value;
- 		});
- 		
- 		var cookies = $.cookie("filters");
-
- 		if(cookies == undefined || cookies == null){
- 			cookies = {};
- 		} else {
- 			cookies = JSON.parse(cookies);
- 		}
-
- 		if(filter.id == ''){
- 			filter.id = getFilterKey(filter);
-
- 			$('#filter-panel .filter-content ul').append(
-	 			'<li class="list-group-item" data-key="'+ filter.id +'">'
-	            + '<input type="checkbox" class="cbx-filter" id="'+filter.id+'" ' + (filter.checked == 'true' ? 'checked' : '') + '> <label for="'+filter.id+'"><span class="color-label" style="background: '+filter.color+'"></span><span>'+filter.filterName+'</span></label></label>'
-	            + '<span class="action-group">'
-	            + '<a href="#" class="btn-edit"><i class="glyphicon glyphicon-edit"></i></a>'
-	            + '<a href="#" class="btn-remove"><i class="glyphicon glyphicon-remove"></i></a>'
-	            + '</span>'
-	            + '</li>'
-	 		);
-
- 		} else {
-
- 			$('#filter-panel .filter-content ul li[data-key="'+filter.id+'"]').html(
-	            '<input type="checkbox" class="cbx-filter" id="'+filter.id+'" ' + (filter.checked == 'true' ? 'checked' : '') + '> <label for="'+filter.id+'"><span class="color-label" style="background: '+filter.color+'"></span><span>'+filter.filterName+'</span></label></label>'
-	            + '<span class="action-group">'
-	            + '<a href="#" class="btn-edit"><i class="glyphicon glyphicon-edit"></i></a>'
-	            + '<a href="#" class="btn-remove"><i class="glyphicon glyphicon-remove"></i></a>'
-	            + '</span>'
- 			);
- 		}
-
- 		cookies[filter.id] = filter;
-
- 		$.cookie("filters", JSON.stringify(cookies));
-
- 		$('#message-filter').hide();
-
- 		loadLogin(filter);
- 	}
-
+ 	// Event when click on delete btn
  	//--------------------------------------------------
 	// Delete filter
 	//--------------------------------------------------
- 	function deleteFilter(key){
+ 	$(document).on('click', '.filter-content ul .btn-remove', function(e){
+ 		e.preventDefault();
+ 		var key = $(this).closest('li').attr('data-key');
  		var cookies = JSON.parse($.cookie("filters"));
- 		// cookies[key].checked = 'false';
- 		// loadLogin(cookies[key]);
 
  		galaxy.earth.logoutFilterUser(key);
 
@@ -129,80 +79,7 @@ $(document).ready(function(){
  		
 
  		$('#event-panel .event-content ul li[data-filter="'+key+'"]').remove();
- 	}
-
- 	//--------------------------------------------------
-	// Edit filter
-	//--------------------------------------------------
- 	function editFilter(key){
- 		var cookies = $.cookie("filters");
-
- 		if(cookies != undefined && cookies != null && cookies != ''){
- 			var filter = JSON.parse(cookies);
-
- 			if(filter[key] != undefined){
- 				for(var attr in filter[key]){
-	 				$('#filter-form input[name="'+attr+'"]').val(filter[key][attr]);
-	 			}
-
-	 			$('#filter-color').colorpicker('setValue', filter[key]['color']);
-
-	 			$('#filterModal').modal('show');
- 			}
- 		}
- 	}
-
- 	//--------------------------------------------------
-	// Load filter
-	//--------------------------------------------------
- 	function loadFilter(){
- 		var cookies = $.cookie("filters");
- 		if(cookies != undefined && cookies != null && cookies != ''){
- 			var filters = JSON.parse(cookies);
- 			
- 			var count = 0;
- 			for(var key in filters){
- 				count++;
-	 			$('#filter-panel .filter-content ul').append(
-		 			'<li class="list-group-item" data-key="'+ filters[key].id +'">'
-		            + '<input type="checkbox" class="cbx-filter" id="'+filters[key].id+'" ' + (filters[key].checked == 'true' ? 'checked' : '') + '> <label for="'+filters[key].id+'"><span class="color-label" style="background: '+filters[key].color+'"></span><span>'+filters[key].filterName+'</span></label></label>'
-		            + '<span class="action-group">'
-		            + '<a href="#" class="btn-edit"><i class="glyphicon glyphicon-edit"></i></a>'
-		            + '<a href="#" class="btn-remove"><i class="glyphicon glyphicon-remove"></i></a>'
-		            + '</span>'
-		            + '</li>'
-		 		);
-
-		 		loadLogin(filters[key]);
-	 		}
-
-	 		if(count != 0){
- 				$('#message-filter').hide();
- 			}
- 		}
- 	}
-
- 	// Event when click on delete btn
- 	//--------------------------------------------------
-	// Delete filter
-	//--------------------------------------------------
- 	$(document).on('click', '.filter-content ul .btn-remove', function(e){
- 		e.preventDefault();
- 		var key = $(this).closest('li').attr('data-key');
- 		deleteFilter(key);
  	});
-
- 	// Event when click on edit btn
- 	//--------------------------------------------------
-	// Delete filter
-	//--------------------------------------------------
- 	$(document).on('click', '.filter-content ul .btn-edit', function(e){
- 		e.preventDefault();
- 		$('#filterModal .title').text('Edit filter');
- 		var key = $(this).closest('li').attr('data-key');
- 		editFilter(key);
- 	});
-
 
  	// Event when filter form submitted
  	//--------------------------------------------------
@@ -210,9 +87,6 @@ $(document).ready(function(){
 	//--------------------------------------------------
  	$(document).on('submit', '#filter-form', function(e){
  		e.preventDefault();
- 		var data = $(this).serializeArray();
- 		addFilter(data);
- 		$('#filterModal').modal('hide');
  	});
 
  	// Event when click on btn-save
@@ -221,9 +95,53 @@ $(document).ready(function(){
 	//--------------------------------------------------
  	$(document).on('click', '.btn-save', function(e){
  		var data = $('#filter-form').serializeArray();
+ 		var filter = {};
 
- 		saveFilter(data);
+ 		data.map(function(field){
+ 			filter[field.name] = field.value;
+ 		});
  		
+ 		var cookies = $.cookie("filters");
+
+ 		if(cookies == undefined || cookies == null){
+ 			cookies = {};
+ 		} else {
+ 			cookies = JSON.parse(cookies);
+ 		}
+
+ 		if(filter.id == ''){
+ 			filter.id = getFilterKey(filter);
+
+ 			$('#filter-panel .filter-content ul').append(
+	 			'<li class="list-group-item" data-key="'+ filter.id +'">'
+	            + '<input type="checkbox" class="cbx-filter" id="'+filter.id+'" ' + (filter.checked == 'true' ? 'checked' : '') + '> <label for="'+filter.id+'"><span class="color-label" style="background: '+filter.color+'"></span><span>'+filter.filtername+'</span></label></label>'
+	            + '<span class="action-group">'
+	            + '<a href="#" class="btn-edit"><i class="glyphicon glyphicon-edit"></i></a>'
+	            + '<a href="#" class="btn-remove"><i class="glyphicon glyphicon-remove"></i></a>'
+	            + '</span>'
+	            + '</li>'
+	 		);
+
+ 		} else {
+
+ 			$('#filter-panel .filter-content ul li[data-key="'+filter.id+'"]').html(
+	            '<input type="checkbox" class="cbx-filter" id="'+filter.id+'" ' + (filter.checked == 'true' ? 'checked' : '') + '> <label for="'+filter.id+'"><span class="color-label" style="background: '+filter.color+'"></span><span>'+filter.filtername+'</span></label></label>'
+	            + '<span class="action-group">'
+	            + '<a href="#" class="btn-edit"><i class="glyphicon glyphicon-edit"></i></a>'
+	            + '<a href="#" class="btn-remove"><i class="glyphicon glyphicon-remove"></i></a>'
+	            + '</span>'
+ 			);
+ 		}
+
+ 		cookies[filter.id] = filter;
+
+ 		$.cookie("filters", JSON.stringify(cookies));
+
+ 		$('#message-filter').hide();
+
+ 		loading(true);
+ 		loadEventList([filter]);
+
  		$('#filterModal').modal('hide');
  	});
 
@@ -239,12 +157,29 @@ $(document).ready(function(){
  		$('#filter-color').colorpicker('setValue', 'rgba(1,1,1,1)');
  	});
 
- 	// Event when click on add-filter-btn
+ 	// Event when click on edit btn
  	//--------------------------------------------------
 	// Delete filter
 	//--------------------------------------------------
- 	$(document).on('click', '.reload-filter-btn', function(){
- 		refreshLogin();
+ 	$(document).on('click', '.filter-content ul .btn-edit', function(e){
+ 		e.preventDefault();
+ 		$('#filterModal .title').text('Edit filter');
+ 		var key = $(this).closest('li').attr('data-key');
+ 		var cookies = $.cookie("filters");
+
+ 		if(cookies != undefined && cookies != null && cookies != ''){
+ 			var filter = JSON.parse(cookies);
+
+ 			if(filter[key] != undefined){
+ 				for(var attr in filter[key]){
+	 				$('#filter-form input[name="'+attr+'"]').val(filter[key][attr]);
+	 			}
+
+	 			$('#filter-color').colorpicker('setValue', filter[key]['color']);
+
+	 			$('#filterModal').modal('show');
+ 			}
+ 		}
  	});
 
  	// Event when chkecbox change
@@ -257,17 +192,17 @@ $(document).ready(function(){
 
  		if($(this).is(':checked')){
  			cookies[key].checked = 'true';
+ 			loading(true);
+ 			loadEventList([cookies[key]]);
  		} else {
  			cookies[key].checked = 'false';
  			$('#event-panel .event-content ul li[data-filter="'+key+'"]').remove();
+ 			galaxy.earth.logoutFilterUser(key);
  		}
-
- 		loadLogin(cookies[key]);
 
  		$.cookie("filters", JSON.stringify(cookies));
  	});
  	
- 	loadFilter();
  	//--------------------------------------------------
  	// Event when change rotation
  	// This function will set rotation and lighting of the earth
@@ -277,7 +212,6 @@ $(document).ready(function(){
  		actionSettings();
  	});
 
- 	loadSettings();
  	//--------------------------------------------------
  	// Event click show more setting
  	//
@@ -303,18 +237,24 @@ $(document).ready(function(){
  		galaxy.earth.flyTo(filter, user);
  	});
 
-
- 	function loadScreen(){
- 		var containerHeight = $('#panel-container').height();
-	 	$('#filter-panel').css({height: (containerHeight/2) + 'px'});
-	 	var controlHeight = parseFloat($('#filter-panel .filter-controls').css('height').replace('px', ''));
-	 	$('#filter-panel .filter-content').css({height: (containerHeight/2 - controlHeight - 10) + 'px'});
-	 	$('#event-panel').css({height: (containerHeight/2) + 'px'});
- 	}
-
- 	loadScreen();
-
+ 	//--------------------------------------------------
+ 	// Resize event
+ 	//
+ 	//--------------------------------------------------
  	$( window ).resize(function() {
 	  loadScreen();
 	});
+
+ 	//--------------------------------------------------
+ 	// Call function load first
+ 	//
+ 	//--------------------------------------------------
+ 	loadScreen();
+	loadSettings();
+	loadFilterList();
+
+	if(!isEmptyFilterList()){
+		loading(true);
+	}
+	loadEventListByAllFilters();
 });
