@@ -30,13 +30,20 @@
 /* checked mark aspect */
 [type="checkbox"]:not(:checked) + label:after,
 [type="checkbox"]:checked + label:after {
-  content: '✔';
+  content: '';
   position: absolute;
   top: 3px; left: 4px;
   font-size: 18px;
   line-height: 0.8;
   color: #09ad7e;
   transition: all .2s;
+  background: url('../images/tick.png');
+  background-position: left;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 30px;
+  width: 100%;
+  top: -10px;
 }
 /* checked mark aspect changes */
 [type="checkbox"]:not(:checked) + label:after {
