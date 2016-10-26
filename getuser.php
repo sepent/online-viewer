@@ -21,9 +21,9 @@ try{
 
 	$device_type = isset($_GET['device_type']) ? addslashes($_GET['device_type']) : '';
 
-	$device_flatform = isset($_GET['device_flatform']) ? addslashes($_GET['device_flatform']) : '';
+	$device_platform = isset($_GET['device_platform']) ? addslashes($_GET['device_platform']) : '';
 
-	$data = $model->selectUserLogin($bundle, $starttime, $endtime, $device_type, $device_flatform);
+	$data = $model->selectUserLogin($bundle, $starttime, $endtime, $device_type, $device_platform);
 
 	echo json_encode(['error' => 0, 'users' => $data]);
 

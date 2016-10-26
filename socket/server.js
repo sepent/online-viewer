@@ -4,10 +4,15 @@ var server = http.Server(app);
 var io = require('socket.io')(server);
 var querystring = require('querystring');
 
-var listener = server.listen(process.env.PORT || 80);
+var listener = server.listen(process.env.PORT || 8080);
 console.log("Listen on port: " + listener.address().port);
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
+});
+
+app.post('/newSign', function (req, res) {
+  io.emit('newSign', {});
+  res.end('{"error": 0, "message": "success"}');
 });
 
 io.on('connection', function (socket) {

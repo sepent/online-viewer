@@ -25,7 +25,7 @@ class SocketIO
         } //Can't connect tot server
         $key = $this->generateKey();
         $out = "GET $address&transport=$transport HTTP/1.1\r\n";
-        $out.= "Host: http://$host:$port\r\n";
+        $out.= "Host: $host".($port ? ":$port" : "")."\r\n";
         $out.= "Upgrade: WebSocket\r\n";
         $out.= "Connection: Upgrade\r\n";
         $out.= "Sec-WebSocket-Key: $key\r\n";

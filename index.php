@@ -89,7 +89,7 @@
                                     <input type="text" class="form-control" id="txtFiltername" name="filtername">
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="txtBundle">Bundle Id:</label>
+                                    <label for="txtBundle">Bundle ID:</label>
                                     <input type="text" class="form-control" id="txtBundle" name="bundleid">
                                 </div>
                                 <div class="col-md-12">
@@ -107,8 +107,8 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="txtDeviceFlatform">Event flatform:</label>
-                                    <input type="text" class="form-control" id="txtDeviceFlatform" name="device_flatform">
+                                    <label for="txtDevicePlatform">Event platform:</label>
+                                    <input type="text" class="form-control" id="txtDevicePlatform" name="device_platform">
                                 </div>
                             </div>
                         </form>

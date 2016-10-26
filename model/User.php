@@ -50,7 +50,7 @@ class User extends Db{
 				$sql .= " AND lower(device_type) similar to '{$device_type}'";
 			}
 
-			// Device flatform
+			// Device platform
 			// if($device_platform){
 			// 	$sql .= " AND device_platform LIKE '{$device_platform}'";
 			// }
