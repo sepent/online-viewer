@@ -4,8 +4,8 @@ var server = http.Server(app);
 var io = require('socket.io')(server);
 var querystring = require('querystring');
 
-server.listen(8080);
-
+var listener = server.listen(process.env.PORT || 80);
+console.log("Listen on port: " + listener.address().port);
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });

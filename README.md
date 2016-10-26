@@ -21,7 +21,7 @@ To run project you must copy your source to xampp/htdocs or var/www/html in ubun
 Create database, and run sql syntax in this file.
 After then, go to:
 
-> model/User.php
+> model/Db.php
 
 Setting the host, user, password in construct method.
 

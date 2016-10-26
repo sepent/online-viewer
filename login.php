@@ -59,7 +59,7 @@ try{
 		// Call method to save data
 		if($model->insertUserLogin($requestData)){
 			$socketio = new SocketIO();
-			$socketio->send('localhost', 8080, 'newSign', '');
+			$socketio->send('https://akademia-analytics-socket.herokuapp.com', 80, 'newSign', '');
 		 	echo json_encode(['error' => 0, 'message' => 'Success']);
 		 	return;
 		}

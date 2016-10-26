@@ -78,19 +78,6 @@
 			var months = ['01','02','03','04','05','06','07','08','09',11,12]
 			var days = ['01','02','03','04','05','06','07','08','09',10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 
-			var arraydevice_type = ['mobile','web'];
-			var arraydevice_platform =[];
-			var device_type = arraydevice_type[Math.floor(Math.random() * arraydevice_type.length)];
-
-			if(device_type =='mobile')
-			{
-				arraydevice_platform = ['ios','android','windowsphone'];
-			}else{
-				arraydevice_platform =['chrome','safari','firefox'];
-			}
-			
-			var device_platform = arraydevice_platform[Math.floor(Math.random() * arraydevice_platform.length)];
-
 			var rand = arrayBundid[Math.floor(Math.random() * arrayBundid.length)];
 			var avatar = arrayAvatar[Math.floor(Math.random() * arrayAvatar.length)];
 
@@ -106,8 +93,8 @@
 						avatar: avatar
 					},
 				device: {
-					type: device_type,
-					platform: device_platform,
+					type: 'mobile',
+					platform: 'ios',
 					uid: 'device_'
 				},
 				event: {

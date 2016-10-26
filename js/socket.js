@@ -2,7 +2,7 @@ var socket = null;
 
 $(document).ready(function(){
 	if(typeof io != 'undefined'){
-		socket = io.connect('http://localhost:8080');
+		socket = io.connect('https://akademia-analytics-socket.herokuapp.com');
 
 		// socket.loadEventList = function(filter){
 		// 	socket.emit('filterRequest', filter);

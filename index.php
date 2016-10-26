@@ -126,7 +126,7 @@
         <script src="plugins/jquery/jquery.min.js"></script>
         <script src="plugins/jquery/jquery.cookie.js"></script>
         <script src="plugins/datepicker/jquery.datetimepicker.full.min.js"></script>
-        <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+        <script src="https://akademia-analytics-socket.herokuapp.com/socket.io/socket.io.js"></script>
         <!-- Js for bootstrap -->
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
         <!-- <script src="plugins/bootstrap/color/jquery.minicolors.min.js"></script> -->
