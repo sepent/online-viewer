@@ -32,11 +32,23 @@ function applyHTMLForEvents(response){
 	loading(false);
 	if(response.error == 0){
 		//alert(response);
-		galaxy.earth.logoutFilterUser(response.filter.id);
+		//galaxy.earth.logoutFilterUser(response.filter.id);
 
 		var ul = '#event-panel .event-content ul';
 
-		$(ul+' li[data-filter="'+response.filter.id+'"]').remove();
+
+        $('#event-panel .event-content ul li[data-filter="'+response.filter.id+'"]').each(function(){
+        	var userId = $(this).attr('data-user');
+        	response.users.map(function(value){	
+	        	if(userId == value.id){
+	        		return;
+	        	}
+        	});
+        	galaxy.earth.logout(response.filter.id, userId);
+	        $(this).remove();
+        });
+
+		//$(ul+' li[data-filter="'+response.filter.id+'"]').remove();
 		// Loop and get position data to login on earth				
 		response.users.map(function(value){	
 			// load a single image asynchronously
@@ -48,17 +60,17 @@ function applyHTMLForEvents(response){
 
 			value.color = rgb;
 
-	        galaxy.earth.login(value);
-
-	        $(ul).append('<li class="list-group-item" data-filter="'+response.filter.id+'" data-user="'+value.id+'" data-date="'+(new Date(value.timestamp)).getTime()+'">'
-	        + '<span class="color-label" style="background: '+response.filter.color+'"></span>'
-	        + '<div class="event-row">'
-	        + '<div>Bundle ID: '+value.bundleid+'</div>'
-	        + '<div>Event type: '+value.event_type+'</div>'
-	        + '<div>Timestamp: '+value.timestamp+'</div>'
-	        + '</div>'
-	    	+ '</li>');
-			
+	        if($('#event-panel .event-content ul li[data-filter="'+response.filter.id+'"][data-user="'+value.id+'"]').length == 0){
+	        	$(ul).append('<li class="list-group-item" data-filter="'+response.filter.id+'" data-user="'+value.id+'" data-date="'+(new Date(value.timestamp)).getTime()+'">'
+		        + '<span class="color-label" style="background: '+response.filter.color+'"></span>'
+		        + '<div class="event-row">'
+		        + '<div>Bundle ID: '+value.bundleid+'</div>'
+		        + '<div>Event type: '+value.event_type+'</div>'
+		        + '<div>Timestamp: '+value.timestamp+'</div>'
+		        + '</div>'
+		    	+ '</li>');
+		    	galaxy.earth.login(value);
+	        }
 		});
 
 		sortEventList();
@@ -97,7 +109,7 @@ function loadEventList(data){
 			loading(false);
 			return;
 		}
-		loading(true);
+		//loading(true);
 		//socket.loadEventList(filter);
 		loadEventByfilter(filter);
 	});
@@ -114,7 +126,7 @@ function loadEventListByAllFilters(){
 			loading(false);
 			continue;
 		}
-		loading(true);
+		//loading(true);
 		//socket.loadEventList(data[id]);
 		loadEventByfilter(data[id]);
 	}

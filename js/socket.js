@@ -20,16 +20,17 @@ $(document).ready(function(){
 			// socket.on('filterResponse', function(data){
 			// 	applyHTMLForEvents(data);
 			// });
-
-			// if(!isEmptyFilterList()){
-			// 	loading(true);
-			// }
+			if(isEmptyFilterList()){
+				loading(false);
+			}
 			
-			//loadEventListByAllFilters();
+			loadEventListByAllFilters();
 		});
 
 		socket.on('disconnect', function(){
-			//loading(true);
+			if(!isEmptyFilterList()){
+				loading(true);
+			}
 		});
 	}else{
 		alert('The socket server is not found');
