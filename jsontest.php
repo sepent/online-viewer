@@ -34,7 +34,7 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, array(
 );
 
 // Call post data URL
-curl_setopt($curl, CURLOPT_URL, 'http://viewer.dev/login.php');  // Set the url path we want to call
+curl_setopt($curl, CURLOPT_URL, 'https://akademia-analytics.herokuapp.com/login.php');  // Set the url path we want to call
 $result = curl_exec($curl);
 
 print_r($result);
