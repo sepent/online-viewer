@@ -1,3 +1,10 @@
+/*----------------------------------------------------
+* Filename: filter.js
+* Author: Akademia
+* Date: YYYY/MM/DD
+* Description: filter css
+* ----------------------------------------------------
+*/
 .btn {
 	border-radius: 0;
 }
@@ -92,9 +99,26 @@ ul.list-group li .color-label{
 	width: 20px;
 	float: left;
 	margin-right: 5px;
-	border-radius: 50%;
 	border: 1px solid #eee;
 	box-sizing: border-box;
+}
+/*CSS for color lable --------------------------- */
+#filter-form .shape-btn .shape-item, #filter-form .shape-group .shape-item{
+	box-sizing: border-box;
+}
+#filter-form .shape-btn .shape-item{
+	display: block;
+}
+#filter-form .shape-group .shape-item{
+	display: inline-block;
+	float: left;
+	margin-right: 10px;
+}
+.shape-item .glyphicon.glyphicon-play{
+	transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
 }
 
 
@@ -108,17 +132,24 @@ ul.list-group li:after{
 	display: block;
 }
 
+ul.list-group li:hover{
+	cursor: pointer;
+}
+
 /* CSS action group*/
 ul.list-group li .action-group{
 	position: absolute;
 	right: 0;
 	top: 0;
 	margin: 10px;
-	display: none;
+	/*display: none;*/
 }
 
-ul.list-group li:hover .action-group{
+ul.list-group li:hover .action-group, ul.list-group li:focus .action-group, ul.list-group li .action-group.active{
 	display: inline-block;
+}
+#filter-panel .filter-content .filter-name{
+	margin-left: 10px;
 }
 
 #filter-panel .action-group .btn-remove{
@@ -129,6 +160,37 @@ ul.list-group li:hover .action-group{
 	color: #09c;
 	margin-right: 5px;
 }
+/* Filter dialog*/
+#filter-form .filterColor{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+#filter-form .input-group-addon{
+	padding: 6px 13px;
+}
+
+#filter-form .input-group-addon, #filter-form .form-control{
+	border-radius: 0;
+}
+
+#filter-form .shape-btn{
+	padding: 6px 6px;
+}
+
+#filter-form .shape-group a{
+	cursor: pointer;
+}
+
+.datetimepicker{
+	padding: 10px;
+}
+
+.validation-msg{
+	color: red;
+}
 
 /* Filter filter-controls */
 #filter-panel .filter-controls{
@@ -136,6 +198,14 @@ ul.list-group li:hover .action-group{
 	margin-top: 5px;
 }
 
+#filter-panel .filter-controls .btn-group{
+	width: 100%;
+}
+
+#filter-panel .filter-controls .btn-group button{
+	width: 50%;
+}
+.colorpicker-alpha {display:none !important;} .colorpicker{ min-width:128px !important;}
 /*CSS for setting panel*/
 #filter-panel .filter-content{
 	position: relative;
@@ -186,7 +256,7 @@ ul.list-group li:hover .action-group{
 	border-top: none;
 }
 
-#event-panel .event-content ul li .color-label{
+#event-panel .event-content ul li .shape-item{
 	float: none;
 	position: absolute;
 	top: 20px;
@@ -196,10 +266,7 @@ ul.list-group li:hover .action-group{
 #event-panel .event-content ul li .event-row{
 	margin-left: 30px;
 	display: inline-block;
-}
-
-#event-panel .event-content ul li:hover{
-	cursor: pointer;
+	font-size: 0.9em;
 }
 
 /* CSS for adding-filter-box*/
@@ -214,4 +281,11 @@ ul.list-group li:hover .action-group{
 .adding-filter-box .modal-content .modal-header{
 	background: #337ab7;
 	color: #fff;
+}
+
+/* CSS for alert panel*/
+#modal-alert{
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
 }

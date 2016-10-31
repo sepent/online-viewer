@@ -14,11 +14,12 @@
 
 	<body>
 		<div style="float: left; border: 1px solid #ddd; padding: 5px; width: 48%;">
+			<button onclick="deleteall()">Delete all data</button>		
 			<button class="auto">Random logged</button>				
 			<div id="message" style="word-break: break-all;"></div>
 		</div>
 		<div style="float: right; border: 1px solid #ddd; padding: 5px; width: 48%;">
-			<form action="insertlogin.php" method="post">
+			<form action="event.php" method="post">
 				<label>bundleid</label>
 				<input type="text" class="form-control" name="bundleid" >
 
@@ -110,10 +111,11 @@
 
 			$.ajax({
 				type: "POST",
-				url: 'login.php',
+				url: 'jsontest.php',
 				data: data,
 				dataType : 'json',
 				success: function(res){
+					console.log(res);
 				  	if(res.error == 0){
 				  		$('#message').append('Added data:<div style="border: 1px solid #ddd; padding: 5px;">' + JSON.stringify(data) + '</div>');
 				  	}
@@ -131,7 +133,7 @@
 			var data = $(this).serializeArray();
 			$.ajax({
 				type: "POST",
-				url: 'login.php',
+				url: 'jsontest.php',
 				data: data,
 				dataType : 'json',
 				success: function(res){
@@ -141,6 +143,17 @@
 				}
 			});	
 		});
+
+		function deleteall() {
+			$.ajax({
+				type:'GET',
+				url: 'deleteevents.php',
+				dataType : 'json',
+				success: function(res){
+					$('#message').append('Added data:<div style="border: 1px solid #ddd; padding: 5px;">' +JSON.stringify(res)+ '</div>');
+				}
+			})
+		};
 		</script>
 	</body>
 </html>

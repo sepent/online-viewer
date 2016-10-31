@@ -1,15 +1,17 @@
-//--------------------------------------------------
-// Galaxy.js file
-// 
-// This file contain galaxy object, which is higher level
-//--------------------------------------------------
+/*----------------------------------------------------
+* Filename: galaxy.js
+* Author: Akademia
+* Date: YYYY/MM/DD
+* Description: This file contain galaxy object, which is higher level
+* ----------------------------------------------------
+*/
 
-function Galaxy(id, config){
+function Galaxy(container, config){
 	//--------------------------------------------------
   	// id property
   	// this is id of element in HTML
   	//--------------------------------------------------
-	this.id = id;
+	this.container = container;
 
 	//--------------------------------------------------
   	// config property
@@ -21,5 +23,5 @@ function Galaxy(id, config){
   	// earth property
   	// It is earth object, which is show on view
   	//--------------------------------------------------
-	this.earth = new Earth(this.id, this.config);
+	this.earth = new Earth(this.container, this.config);
 };

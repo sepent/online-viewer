@@ -1,0 +1,28 @@
+
+.imageInfoBox{
+     height: 100px;
+     width: 100px; 
+     float: left; 
+     margin-right:10px; 
+     margin-bottom: 10px;
+     text-align: center
+}
+
+.showRawEvent{
+    color:#fff;
+    font-size: 11px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    border-top: 1px solid #ddd;
+    background: transparent;
+    margin-top: 10px;
+    width: 100%;
+    outline: 0;
+}
+
+
+.showRawEvent:hover{
+    background: rgba(0,0,0,0.4);
+}

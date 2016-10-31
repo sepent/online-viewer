@@ -1,6 +1,10 @@
 <?php
-/**
-* 
+/*----------------------------------------------------
+* Filename: Db.php
+* Author: Akademia
+* Date: YYYY/MM/DD
+* Description: The Db is parent model, that contains db connection
+* ----------------------------------------------------
 */
 class Db{
 	protected $connection = null;
@@ -16,6 +20,12 @@ class Db{
 			$username = "bolnwoylarherg";
 			$password = "6miwdS4HqZYBN780ngc_2g4CVA";
 			$type = "pgsql";
+			// $host = "localhost";
+			// $dbname = "viewer";
+			// $username = "root";
+			// $password = "";
+			// $type = "mysql";
+
 
 			if(!$this->connect("{$type}:host={$host};dbname={$dbname}", $username, $password)){
 				throw new Exception("Cannot connect to db", 1);
@@ -25,12 +35,14 @@ class Db{
 			throw $e;
 		}
 	}
+
 	/**
 	* Connect to db
 	*
 	* @param string $strConnect
 	* @param string $username
 	* @param string $password
+	* @return boolean
 	*/
 	public function connect($strConnect, $username, $password){
 		try {

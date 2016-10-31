@@ -1,68 +1,54 @@
-//--------------------------------------------------
-// init.js file
-// 
-// This file will run begin to create object and display the earth
-//--------------------------------------------------
-
-
+/*----------------------------------------------------
+* Filename: init.js
+* Author: Akademia
+* Date: YYYY/MM/DD
+* Description: The init file, which will be called first
+* ----------------------------------------------------
+*/
 // gloable variable of earth object with cesium
 var galaxy = null;
 
 $(document).ready(function(){
 	//$.removeCookie('filters');
-	/*--------------------------------------------------
-	Call ajax get setting json file
-	--------------------------------------------------*/
-	//$.getJSON('js/config.json', function(data){
-	 	//$('#txtRotation').val(data.rotation);
+	//$.removeCookie('filterIndexs');
+	galaxy = new Galaxy('earthContainer', {
+		"logouttime" : false,
 
-	 	//$('#cbx-rotation').prop("checked",data.cbxRotation);
+		"speedlighting" : false,
 
+		"mapKey" : "As8UzukXgfjnNg9BhvsECsudfuvHv88Qv4-bK5U_D3yN187IqnPbUAGqps4AyKSB",
 
-	 	//$('#cbx-lighting').prop("checked",data.cbxLighting);
+		"rotation": 3000,
 
-		// Create cesium object
-		galaxy = new Galaxy('earthContainer', {
-			"logouttime" : false,
+		"cbxRotation": false,
 
-			"speedlighting" : false,
+		"cbxLighting": false, 
 
-			"mapKey" : "As8UzukXgfjnNg9BhvsECsudfuvHv88Qv4-bK5U_D3yN187IqnPbUAGqps4AyKSB",
+		"cesium": {
+		    "animation": false,
 
-			"rotation": 3000,
+		    "baseLayerPicker": false, 
 
-			"cbxRotation": false,
+		    "homeButton": false,
 
-			"cbxLighting": false, 
+		    "infoBox": true,
 
-			"cesium": {
-			    "animation": false,
+		    "selectionIndicator": true,
 
-			    "baseLayerPicker": false, 
+		    "timeline": false,
 
-			    "homeButton": false,
+		    "navigationHelpButton": false,
+		    
+		    "fullscreenButton": false
+		}
+	});
 
-			    "infoBox": true,
+	// Show the earth
+	galaxy.earth.show();
 
-			    "selectionIndicator": true,
-
-			    "timeline": false,
-
-			    "navigationHelpButton": false,
-			    
-			    "fullscreenButton": false
-			}
-		});
-
-		// Show the earth
-		galaxy.earth.show();
-
-		// Hide loading
-
-		//actionSettings();
-
-		// Call to get data when first visit
-	 	//loadLogin({}, $('#filter-form').attr('action'));
-	//});
+	Event.init();
+	Filter.init();
+	Filter.resetFilterList();
+	Effect.init();
 });
 

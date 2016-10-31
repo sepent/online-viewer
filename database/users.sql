@@ -42,14 +42,14 @@ CREATE TABLE `users` (
   `device_uid` varchar(50) NOT NULL,
   `event_type` varchar(20) NOT NULL,
   `avatar` varchar(100) NOT NULL,
-  `event_payload` text NOT NULL
+  `event_payload_image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_uid`, `bundleid`, `latitude`, `longitude`, `username`, `user_oauthUid`, `city`, `country`, `timestamp`, `device_type`, `device_platform`, `device_uid`, `event_type`, `avatar`, `event_payload`) VALUES
+INSERT INTO `users` (`id`, `user_uid`, `bundleid`, `latitude`, `longitude`, `username`, `user_oauthUid`, `city`, `country`, `timestamp`, `device_type`, `device_platform`, `device_uid`, `event_type`, `avatar`, `event_payload_image`) VALUES
 (169, 'user_40', 'overfull.net', 127.615791, -3.127192, 'username40', '', '', '', '2016-01-25 00:59:59', 'mobile', 'ios', 'device_', '', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Map_marker.svg/2000px-Map_marker.svg.png', ''),
 (170, 'user_72', 'overfull.net', -56.291111, 18.414246, 'username72', '', '', '', '2016-01-25 00:59:59', 'mobile', 'ios', 'device_', '', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Map_marker.svg/2000px-Map_marker.svg.png', ''),
 (171, 'user_31', 'com.akademia.ryokou', -69.153290, 70.827568, 'username31', '', '', '', '2016-01-25 00:59:59', 'mobile', 'ios', 'device_', '', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Map_marker.svg/2000px-Map_marker.svg.png', ''),

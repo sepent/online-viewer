@@ -1,9 +1,11 @@
-//--------------------------------------------------
-// earth.js file
-// Cotnains earth object
-//--------------------------------------------------
-
-function Earth(id, config){
+/*----------------------------------------------------
+* Filename: earth.js
+* Author: Akademia
+* Date: YYYY/MM/DD
+* Description: Earth object
+* ----------------------------------------------------
+*/
+function Earth(container, config){
 	//--------------------------------------------------
 	// config property
 	// 
@@ -15,7 +17,7 @@ function Earth(id, config){
 	// id property
 	// id of element on HTML
 	//--------------------------------------------------
-	this.id = id;
+	this.container = container;
 
 	//--------------------------------------------------
 	// viewer property
@@ -43,10 +45,10 @@ function Earth(id, config){
 		// register key bing map
  		Cesium.BingMapsApi.defaultKey = this.config.mapKey;
 
-		this.viewer = new Cesium.Viewer(this.id, this.config.cesium);
+		this.viewer = new Cesium.Viewer(this.container, this.config.cesium);
 
-		//this.user = new User(this.viewer);
 		this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
+		this.viewer.infoBox.frame.setAttribute('sandbox', 'allow-same-origin allow-popups allow-forms allow-scripts allow-top-navigation');
 	};
 
 	//--------------------------------------------------
@@ -130,7 +132,7 @@ function Earth(id, config){
 			this.users[_point.filter] = {};
 		}
 
-		this.users[_point.filter][_point.id]  = user;
+		this.users[_point.filter][_point.key]  = user;
 		// if(this.config.logouttime != false){
 		// 	this.users[_point.user_uid].logoutTimeout = window.setTimeout(logoutAffter, this.config.logouttime);
 		// }
@@ -201,7 +203,7 @@ function Earth(id, config){
 	this.logoutAllUser = function(){
 		for (var filter in this.users) {
 			for (var user in this.users[filter]) {
-				this.logout(key, user);
+				this.logout(filter, user);
 			}
 		}
 	};

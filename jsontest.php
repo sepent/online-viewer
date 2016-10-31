@@ -23,18 +23,19 @@ $json = '{
             }
 }';
 
+$jsondata = json_encode($_POST);
 
 $curl = curl_init();
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
-curl_setopt($curl, CURLOPT_POSTFIELDS, $json);                                                                  
+curl_setopt($curl, CURLOPT_POSTFIELDS, $jsondata);                                                                  
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);                                                                      
 curl_setopt($curl, CURLOPT_HTTPHEADER, array(                                                                          
     'Content-Type: application/json',                                                                                
-    'Content-Length: ' . strlen($json))                                                                       
+    'Content-Length: ' . strlen($jsondata))                                                                       
 );
 
 // Call post data URL
-curl_setopt($curl, CURLOPT_URL, 'https://akademia-analytics.herokuapp.com/login.php');  // Set the url path we want to call
+curl_setopt($curl, CURLOPT_URL, ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://").$_SERVER['HTTP_HOST'].'/event.php');  // Set the url path we want to call
 $result = curl_exec($curl);
 
 print_r($result);
