@@ -12,12 +12,32 @@ window.showRawEvent = function() {
 
  	$('#myModal').modal('show');
  	var data = JSON.parse(iframe.find('#jsonUser').val());
- 	delete data['filter'];
- 	delete data['key'];
- 	delete data['shape'];
- 	delete data['color'];
 
- 	$('div#dataJsonUser').text(JSON.stringify(data));
+ 	var ressult = {
+            "bundleid": data["bundleid"],
+            "user": {
+                "uid": data["user_uid"],
+                "username": data["username"]
+            },
+            "device": {
+                "type": data["device_type"],
+                "platform": data["device_platform"],
+                "uid": data["device_uid"]
+            },
+            "event": {
+                "type": data["event_type"],
+                "payload": {
+                	"image": data["event_payload_image"]
+                }
+            },
+            "coords": {
+                "latitude": data["latitude"],
+                "longitude": data["longitude"],
+                "timestamp": data["timestamp"]
+            }
+	};
+
+ 	$('div#dataJsonUser').text(JSON.stringify(ressult));
 };
 
 $('#panel-container').click(function(){

@@ -26,6 +26,7 @@
 });
 
 try{
+	require 'defined.php';
 	// Import model to access to database
 	require 'model/User.php';
 	//require 'weight/socket.io.php';
@@ -78,7 +79,7 @@ try{
 			'city'				=> isset($dataObject['coords']['city']) 		? addslashes($dataObject['user']['city']) : '',
 			'country'			=> isset($dataObject['coords']['country'])	? addslashes($dataObject['user']['country']) : '',
 			'event_type'		=> isset($dataObject['event']['type']) 		? addslashes($dataObject['event']['type']) : '',
-			'event_payload'		=> isset($dataObject['event']['payload ']) 	? addslashes($dataObject['event']['payload']) : ''
+			'event_payload_image'		=> isset($dataObject['event']['payload ']['image']) 	? addslashes($dataObject['event']['payload']['image']) : ''
 		];
 
 		// Call method to save data
@@ -90,7 +91,7 @@ try{
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 			// Call post data URL
-			curl_setopt($curl, CURLOPT_URL, 'https://akademia-analytics-socket.herokuapp.com/newSign');  // Set the url path we want to call
+			curl_setopt($curl, CURLOPT_URL, SOCKET_URL.'/newSign');  // Set the url path we want to call
 			//curl_setopt($curl, CURLOPT_URL, 'http://localhost:8080/newSign');
 			$result = curl_exec($curl);
 

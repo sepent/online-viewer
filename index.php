@@ -1,3 +1,4 @@
+<?php require 'defined.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,6 +21,9 @@
         <!-- CSS for customize and handle -->
         <link rel="stylesheet" type="text/css" href="css/common.css">
         <link rel="stylesheet" type="text/css" href="css/filter.css">
+        <script type="text/javascript">
+            var SOCKET_URL = '<?php echo SOCKET_URL; ?>';
+        </script>
     </head>
     <body onload="functionLoad()">
         <div id="earthContainer"></div>
@@ -175,7 +179,7 @@
 
         <script src="plugins/jquery/jquery.cookie.js"></script>
         <script src="plugins/datepicker/js/bootstrap-datetimepicker.js"></script>
-        <script src="https://akademia-analytics-socket.herokuapp.com/socket.io/socket.io.js"></script>
+        <script src="<?php echo SOCKET_URL;?>/socket.io/socket.io.js"></script>
         <!-- Js for bootstrap -->
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
         <!-- <script src="plugins/bootstrap/color/jquery.minicolors.min.js"></script> -->

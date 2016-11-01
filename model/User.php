@@ -117,7 +117,7 @@ class User extends Db{
 								'{$user['city']}',
 								'{$user['country']}',
 								'{$user['event_type']}',
-								'{$user['event_payload']}'
+								'{$user['event_payload_image']}'
 			   					)";
 
 			$data =  $this->connection->query($sql);

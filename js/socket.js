@@ -10,7 +10,7 @@ var socket = null;
 $(document).ready(function(){
 	var isReconnect = false;
 	if(typeof io != 'undefined'){
-		socket = io.connect('https://akademia-analytics-socket.herokuapp.com');
+		socket = io.connect(SOCKET_URL);
 
 		socket.on('connected', function (data) {
 
