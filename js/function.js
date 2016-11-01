@@ -12,6 +12,8 @@ var Event = {
 	 	// Event click on list
 	 	//--------------------------------------------------
 	 	$(document).on('click', '#event-panel .event-content ul li', function(){
+	 		$('#event-panel .event-content ul li').removeClass('active');
+	 		$(this).addClass('active');
 	 		var filter = $(this).attr('data-filter');
 	 		var user = $(this).attr('data-user');
 	 		galaxy.earth.flyTo(filter, user);
@@ -183,12 +185,31 @@ var Filter = {
 	    }).on('changeColor',function(){
 	    	$('#filter-form .shape-btn .shape-item').css({color: $('#filter-form input[name="color"]').val()});
 	    });
+	    $(document).on('change paste blur', '#filter-color input', function(){
+	    	if($(this).val() == ''){
+	    		$(this).val($(this).closest('#filter-color').attr('default-value'));
+	    	}
+
+	    	$('#filter-form .shape-btn .shape-item').css({color: $(this).val()});
+	    });
 
 	    $(document).on('click','#filter-form .shape-group a', function(){
 	    	$('#filter-form .shape-btn .shape-item').html('<i class="' + Filter.iconList[$(this).data('value')] + '"></i>');
 	    	$('#filter-form input[name="shape"]').val($(this).data('value'));
 	    });
 
+	    $(document).on('change paste blur', '#filter-form input[name="shape"]', function(){
+	    	if($(this).val() == ''){
+	    		$('#filter-form .shape-btn .shape-item').html('<i class="' + Filter.iconList[$(this).attr('default-value')] + '"></i>');
+	    		$(this).val($(this).attr('default-value'));
+	    	}
+	    });
+
+	    $(document).on('change paste blur', '#filter-form input[name="filtername"]', function(){
+	    	if($(this).val() == ''){
+	    		$(this).val($(this).attr('default-value'));
+	    	}
+	    });
 		//--------------------------------------------------
 		// Save filter
 		//--------------------------------------------------
@@ -239,6 +260,12 @@ var Filter = {
 	 		$('#filter-form').find('.shape-btn .shape-item').css({color: 'rgba(1,1,1,1)'})
 	 		$('#filter-form').find('.shape-btn .shape-item').html('<i class="'+Filter.iconList['circle']+'"></i>');
 	 		$('#filter-form input[name="shape"]').val('circle');
+	 		$('#filter-form input[name="shape"]').attr('default-value', 'circle');
+
+	 		$('#filter-color').attr('default-value', 'rgba(1,1,1,1)');
+	 		
+	 		$('#filter-form input[name="filtername"]').attr('default-value', 'New filter');
+	 		$('#filter-form input[name="filtername"]').val('New filter');
 	 	});
 
 	 	//--------------------------------------------------
@@ -264,6 +291,12 @@ var Filter = {
 
 		 			$('#filter-form').find('.shape-btn .shape-item').css({color: filter[key]['color']});
 		 			$('#filter-form').find('.shape-btn .shape-item').html('<i class="' + Filter.iconList[filter[key]['shape']] + '"></i>');
+
+		 			$('#filter-form input[name="shape"]').attr('default-value', filter[key]['shape']);
+
+	 				$('#filter-color').attr('default-value', filter[key]['color']);
+
+	 				$('#filter-form input[name="filtername"]').attr('default-value', filter[key]['filtername']);
 
 		 			$('#filterModal').modal('show');
 	 			}
@@ -314,7 +347,8 @@ var Filter = {
 	        //forceHelperSize: true,
 	        update: function (event, ui) {
 	            Filter.updateFilterIndexByScreen();
-	        }
+	        },
+	        cancel : '.filter-content .list-group .action-group, .filter-content .list-group .cbx-filter, .filter-content .list-group label'
 	    });
 
 	    // Generate list of icon
@@ -495,7 +529,7 @@ var Filter = {
 
 		$('#filter-panel .filter-content ul li[data-key="'+data.key+'"]').html(
 		    '<input type="checkbox" class="cbx-filter" id="'+data.key+'" ' + (data.checked == 'true' ? 'checked' : '') + '/>'
-		    + '<label for="'+data.key+'"><span class="shape-item" style="color: '+data.color+'"><i class="'+Filter.iconList[data.shape]+'"></i></span> <span class="filter-name">'+data.filtername+'</span></label>'
+		    + '<label for="'+data.key+'"></label><span class="shape-item" style="color: '+data.color+'"><i class="'+Filter.iconList[data.shape]+'"></i></span> <span class="filter-name" style="font-weight: bold">'+data.filtername+'</span>'
 		    + '<span class="action-group">'
 		    + '<a href="#" class="btn-edit"><i class="glyphicon glyphicon-edit"></i></a>'
 		    + '<a href="#" class="btn-remove"><i class="glyphicon glyphicon-remove"></i></a>'

@@ -141,8 +141,13 @@ ul.list-group li .action-group{
 	position: absolute;
 	right: 0;
 	top: 0;
-	margin: 10px;
+	margin: 7px;
 	/*display: none;*/
+	font-size: 17px;
+	cursor: pointer;
+}
+#filter-panel .filter-content .list-group li{
+	cursor: move;
 }
 
 ul.list-group li:hover .action-group, ul.list-group li:focus .action-group, ul.list-group li .action-group.active{
@@ -158,7 +163,7 @@ ul.list-group li:hover .action-group, ul.list-group li:focus .action-group, ul.l
 
 #filter-panel .action-group .btn-edit{
 	color: #09c;
-	margin-right: 5px;
+	margin-right: 8px;
 }
 /* Filter dialog*/
 #filter-form .filterColor{
@@ -254,6 +259,16 @@ ul.list-group li:hover .action-group, ul.list-group li:focus .action-group, ul.l
 }
 #event-panel .event-content ul:not(:first-child){
 	border-top: none;
+}
+
+#event-panel .event-content ul li{
+	border-bottom: 2px solid #ddd;
+}
+#event-panel .event-content ul li.active{
+	background: #eee;
+	border-radius: 0;
+	color: inherit;
+	border-right: 2px solid #09c;
 }
 
 #event-panel .event-content ul li .shape-item{

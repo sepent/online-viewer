@@ -21,7 +21,7 @@ try{
 
 	if(is_numeric($starttime)){
 		$date = strtotime(date('Y-m-d H:i:s'));
-		$starttime = date('Y-m-d H:i:s', $date - $starttime);
+		$starttime = date('Y-m-d H:i:s', $date + $starttime);
 	}
 
 	$endtime = isset($_GET['endtime']) ? addslashes($_GET['endtime']) : '';
