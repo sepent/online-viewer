@@ -49,6 +49,32 @@ function Earth(container, config){
 
 		this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
 		this.viewer.infoBox.frame.setAttribute('sandbox', 'allow-same-origin allow-popups allow-forms allow-scripts allow-top-navigation');
+		
+		var parent = this;
+		handler = new Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas);
+		handler.setInputAction(function(click) {
+			var pickedObject = parent.viewer.scene.pick(click.position);
+			$('#event-panel .event-content ul li').removeClass('active');
+			    if (Cesium.defined(pickedObject)) {
+					for(var filterKey in parent.users){
+						for(var userKey in parent.users[filterKey]){
+							var user = parent.users[filterKey][userKey];
+							if(user.entity == null)
+							{
+								continue;
+							}else{
+								if(pickedObject.id.id == user.entity.id){
+									$(".cesium-infoBox-camera i" ).remove();
+									$(".cesium-infoBox-camera" ).append('<i class="'+Filter.iconList[user.data.shape]+'" style="color: rgba('+user.data.color+')"></i>');
+									$('#event-panel .event-content ul li[data-user="'+userKey+'"]').addClass('active');
+									console.log(user.data);
+								break;
+								}
+							}
+						}
+					}
+				}
+			}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 	};
 
 	//--------------------------------------------------

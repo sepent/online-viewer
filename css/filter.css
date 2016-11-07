@@ -114,7 +114,7 @@ ul.list-group li .color-label{
 	float: left;
 	margin-right: 10px;
 }
-.shape-item .glyphicon.glyphicon-play{
+.shape-item .glyphicon.glyphicon-play, .cesium-button .glyphicon.glyphicon-play{
 	transform: rotate(-90deg);
 	-moz-transform: rotate(-90deg);
 	-ms-transform: rotate(-90deg);
@@ -261,7 +261,7 @@ ul.list-group li:hover .action-group, ul.list-group li:focus .action-group, ul.l
 	border-top: none;
 }
 
-#event-panel .event-content ul li{
+#event-panel .event-content ul li:not(:last-child){
 	border-bottom: 2px solid #ddd;
 }
 #event-panel .event-content ul li.active{
@@ -269,6 +269,9 @@ ul.list-group li:hover .action-group, ul.list-group li:focus .action-group, ul.l
 	border-radius: 0;
 	color: inherit;
 	border-right: 2px solid #09c;
+}
+#event-panel .event-content ul li.active:not(:first-child){
+	border-top:1px solid #ddd;
 }
 
 #event-panel .event-content ul li .shape-item{

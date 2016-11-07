@@ -19,12 +19,15 @@ try{
 
 	$starttime = isset($_GET['starttime']) ? addslashes($_GET['starttime']) : '';
 
+	$date = strtotime(date('Y-m-d H:i:s'));
 	if(is_numeric($starttime)){
-		$date = strtotime(date('Y-m-d H:i:s'));
 		$starttime = date('Y-m-d H:i:s', $date + $starttime);
 	}
 
 	$endtime = isset($_GET['endtime']) ? addslashes($_GET['endtime']) : '';
+	if(is_numeric($endtime)){
+		$endtime = date('Y-m-d H:i:s', $date + $endtime);
+	}
 
 	$device_type = isset($_GET['device_type']) ? addslashes($_GET['device_type']) : '';
 

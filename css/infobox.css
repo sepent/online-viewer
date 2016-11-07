@@ -1,7 +1,7 @@
 
 .imageInfoBox{
      height: 100px;
-     width: 100px; 
+     width: 150px; 
      float: left; 
      margin-right:10px; 
      margin-bottom: 10px;
@@ -10,7 +10,7 @@
 
 .showRawEvent{
     color:#fff;
-    font-size: 11px;
+    font-size: 13px;
     padding: 10px 20px 10px 20px;
     text-decoration: none;
     border: none;
@@ -21,8 +21,6 @@
     width: 100%;
     outline: 0;
 }
-
-
 .showRawEvent:hover{
     background: rgba(0,0,0,0.4);
 }

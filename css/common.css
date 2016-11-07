@@ -6,7 +6,41 @@
 * ----------------------------------------------------
 */
 /*Import css*/
+
+
 @import url(../plugins/cesium/Build/Cesium/Widgets/widgets.css);
+.cesium-svgPath-svg{
+ display: none;
+}
+
+button.cesium-infoBox-camera{
+  padding: 0px 0px;
+}
+button.cesium-infoBox-camera:hover{
+  background: transparent;
+  border:none;
+  cursor:none;
+}
+
+.cesium-geocoder-searchButton .cesium-svgPath-svg{
+   display: block;
+}
+.cesium-toolbar-button .cesium-sceneModePicker-button3D .cesium-svgPath-svg{
+  display: block;
+}
+.cesium-toolbar-button .cesium-sceneModePicker-visible .cesium-svgPath-svg{
+  display: block;
+}
+.cesium-toolbar-button .cesium-sceneModePicker-button3D .cesium-svgPath-svg{
+  display: block;
+}
+.cesium-toolbar-button .cesium-sceneModePicker-button2D .cesium-svgPath-svg{
+  display: block;
+}
+.cesium-toolbar-button .cesium-sceneModePicker-buttonColumbusView .cesium-svgPath-svg{
+  display: block;
+}
+
 
 /* CSS for Check box ------------------------------------------------*/
 /* Base for label styling */

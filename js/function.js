@@ -17,6 +17,16 @@ var Event = {
 	 		var filter = $(this).attr('data-filter');
 	 		var user = $(this).attr('data-user');
 	 		galaxy.earth.flyTo(filter, user);
+			 $(".cesium-infoBox-camera i" ).remove();
+			 $("button.cesium-infoBox-camera.cesium-svgPath-svg").remove();
+			 for(var key in Event.list[filter].users){
+				 if(Event.list[filter].users[key].key == user){
+					 console.log(galaxy.earth.users[filter][user]);
+					 var color = "rgba("+galaxy.earth.users[filter][user].data.color[0]+","+galaxy.earth.users[filter][user].data.color[1]+","+galaxy.earth.users[filter][user].data.color[2]+","+galaxy.earth.users[filter][user].data.color[3]+")";
+					 $(".cesium-infoBox-camera" ).append('<i class="'+Filter.iconList[Event.list[filter].users[key].shape]+'" style="color: '+color+'"></i>');
+					 break;
+				 }
+			 }
 	 	});
 	},
 
@@ -93,6 +103,8 @@ var Event = {
 	        $(this).remove();
 	    });
 
+	    var cookies = Filter.getFilterCookie();
+
 		//$(ul+' li[data-filter="'+response.filter.key+'"]').remove();
 		// Loop and get position data to login on earth				
 		response.users.map(function(value){
@@ -101,7 +113,32 @@ var Event = {
 
 			value.key = Event.generateUserKey(value);
 
-			var rgb = response.filter.color.match(/\d+/g);
+			var rgb = ["0","0","0","1"];
+
+			var breakStatus = false;
+
+			var color = response.filter.color;
+
+			if(response.filter.color == ''){
+				for(var filterKey in cookies){
+					if(cookies[filterKey].checked == 'true' && Event.list[cookies[filterKey].key] != undefined){
+						for(var userKey in Event.list[cookies[filterKey].key].users){
+							if(Event.generateUserKey(Event.list[cookies[filterKey].key].users[userKey]) == value.key && cookies[filterKey].color != ''){
+								rgb = cookies[filterKey].color.match(/\d+/g);
+								breakStatus = true;
+								color = cookies[filterKey].color;
+								break;
+							}
+						};
+
+						if(breakStatus){
+							break;
+						}
+					}
+				};
+			} else {
+				rgb = response.filter.color.match(/\d+/g);
+			}
 
 			value.color = rgb;
 
@@ -109,7 +146,7 @@ var Event = {
 
 	        if($('#event-panel .event-content ul li[data-user="'+value.key+'"]').length == 0){
 	        	$('#event-panel .event-content ul').append('<li class="list-group-item" data-filter="'+response.filter.key+'" data-user="'+value.key+'" data-date="'+(new Date(value.timestamp)).getTime()+'">'
-		        + '<span class="shape-item" style="color: '+response.filter.color+'"><i class="'+Filter.iconList[response.filter.shape]+'"></i></span>'
+		        + '<span class="shape-item" style="color: '+ (color != '' ? color : 'rgba(0,0,0,1)') +'"><i class="'+Filter.iconList[response.filter.shape]+'"></i></span>'
 		        + '<div class="event-row">'
 		        + '<div>'+value.bundleid+'</div>'
 		        + '<div>'+value.event_type+'</div>'
@@ -140,7 +177,12 @@ var Event = {
 	removeByFilterId: function(id){
 		$('#event-panel .event-content ul li[data-filter="'+id+'"]').remove();
 	 	galaxy.earth.logoutFilterUser(id);
-	}
+	},
+	//--------------------------------------------------
+	// Event click marker on Earth
+	//--------------------------------------------------
+
+
 };
 
 var Filter = {
@@ -180,17 +222,18 @@ var Filter = {
 		// Set fiter color
 		//--------------------------------------------------
 		$('#filter-color').colorpicker({
-	        color: 'rgba(1,1,1,1)',
+	        color: 'rgba(0,0,0,1)',
 	        format: 'rgba'
 	    }).on('changeColor',function(){
 	    	$('#filter-form .shape-btn .shape-item').css({color: $('#filter-form input[name="color"]').val()});
 	    });
 	    $(document).on('change paste blur', '#filter-color input', function(){
 	    	if($(this).val() == ''){
-	    		$(this).val($(this).closest('#filter-color').attr('default-value'));
+	    		//$(this).val($(this).closest('#filter-color').attr('default-value'));
+	    		$('#filter-form .shape-btn .shape-item').css({color: 'rgba(0,0,0,1)'});
+	    	}else {
+	    		$('#filter-form .shape-btn .shape-item').css({color: $(this).val()});
 	    	}
-
-	    	$('#filter-form .shape-btn .shape-item').css({color: $(this).val()});
 	    });
 
 	    $(document).on('click','#filter-form .shape-group a', function(){
@@ -256,13 +299,13 @@ var Filter = {
 	 		$('#filter-form input[name="key"]').val('');
 	 		$('#filter-form input[name="checked"]').val('true');
 	 		$('#filterModal .title').text('Add new filter');
-	 		$('#filter-color').colorpicker('setValue', 'rgba(1,1,1,1)');
-	 		$('#filter-form').find('.shape-btn .shape-item').css({color: 'rgba(1,1,1,1)'})
+	 		$('#filter-color').colorpicker('setValue', 'rgba(0,0,0,1)');
+	 		$('#filter-form').find('.shape-btn .shape-item').css({color: 'rgba(0,0,0,1)'})
 	 		$('#filter-form').find('.shape-btn .shape-item').html('<i class="'+Filter.iconList['circle']+'"></i>');
 	 		$('#filter-form input[name="shape"]').val('circle');
 	 		$('#filter-form input[name="shape"]').attr('default-value', 'circle');
 
-	 		$('#filter-color').attr('default-value', 'rgba(1,1,1,1)');
+	 		$('#filter-color').attr('default-value', 'rgba(0,0,0,1)');
 	 		
 	 		$('#filter-form input[name="filtername"]').attr('default-value', 'New filter');
 	 		$('#filter-form input[name="filtername"]').val('New filter');
@@ -529,7 +572,7 @@ var Filter = {
 
 		$('#filter-panel .filter-content ul li[data-key="'+data.key+'"]').html(
 		    '<input type="checkbox" class="cbx-filter" id="'+data.key+'" ' + (data.checked == 'true' ? 'checked' : '') + '/>'
-		    + '<label for="'+data.key+'"></label><span class="shape-item" style="color: '+data.color+'"><i class="'+Filter.iconList[data.shape]+'"></i></span> <span class="filter-name" style="font-weight: bold">'+data.filtername+'</span>'
+		    + '<label for="'+data.key+'"></label><span class="shape-item" style="color: '+ (data.color != '' ? data.color : 'rgba(0,0,0,1)') +'"><i class="'+Filter.iconList[data.shape]+'"></i></span> <span class="filter-name" style="font-weight: bold">'+data.filtername+'</span>'
 		    + '<span class="action-group">'
 		    + '<a href="#" class="btn-edit"><i class="glyphicon glyphicon-edit"></i></a>'
 		    + '<a href="#" class="btn-remove"><i class="glyphicon glyphicon-remove"></i></a>'
@@ -627,9 +670,9 @@ var Filter = {
 		// Validate for color
 		value = $(ob).find('input[name="color"]').val();
 		if(value == ''){
-			$(ob).find('input[name="color"]').focus();
-			$('#colorValidation').text('Please input filter\'s color');
-			isOK = false;
+			// $(ob).find('input[name="color"]').focus();
+			// $('#colorValidation').text('Please input filter\'s color');
+			// isOK = false;
 		} else if(!validTextColour(value)){
 			$(ob).find('input[name="color"]').focus();
 			$('#colorValidation').text('Invalid color\'s name');
@@ -768,4 +811,6 @@ var Effect = {
         	$("#modal-alert").slideUp(500);
         });  
 	}
+
+	//--------------------------------------------------
 };

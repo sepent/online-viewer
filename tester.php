@@ -41,8 +41,11 @@
 				<label>Timestamp</label>
 				<input type="text" class="form-control" name= "coords[timestamp]" >
 
-				<label>Event</label>
+				<label>Event type</label>
 				<input type="text" class="form-control" name= "event[type]" >
+
+				<label>Event payload image </label>
+				<input type="text" class="form-control" name= "event[payload][image]" >
 
 				<label>Device type</label>
 				<input type="text" class="form-control" name= "device[type]" >
@@ -57,6 +60,7 @@
 			</form>
 			<div id="addmessage" style="word-break: break-all;"></div>
 		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
 		<script type="text/javascript">
 		function autoinsert(){
 			var id = Math.floor(Math.random() * 100);
@@ -73,7 +77,6 @@
 							  'http://cdn.osxdaily.com/wp-content/uploads/2013/07/dancing-banana.gif',
 							  'https://upload.wikimedia.org/wikipedia/commons/8/84/Konqi_svg.svg',
 							  'http://media.giphy.com/media/109Ku3hdapZJle/giphy.gif'
-
 							];
 			var yeahs = [2014, 2015,2016];
 			var months = ['01','02','03','04','05','06','07','08','09',11,12]
@@ -100,12 +103,15 @@
 				},
 				event: {
 					type: 'login',
-					payload: 'object'
+					payload: {
+						image : avatar
+					}
 				},
 				coords: {
 					latitude: latitude,
 					longitude: longitude,
-					timestamp: ''+yeah+'-'+month+'-'+day+'T06:59:59.000Z'
+					//timestamp: ''+yeah+'-'+month+'-'+day+'T06:59:59.000Z'
+					timestamp:  moment().format("Y-MM-DD H:mm:ss")
 				}
 			};
 
@@ -129,8 +135,32 @@
 
 		// Set data
 		$('form').submit(function(e){
-			e.preventDefault();
-			var data = $(this).serializeArray();
+			 e.preventDefault();
+			var data = {
+				bundleid: $('input[name="bundleid"]').val(),
+				user: {
+						uid: $('input[name="user[uid]"]').val(),
+						username:$('input[name="user[username]"]').val(),
+						avatar: $('input[name="user[avatar]').val()
+					},
+				device: {
+					type: $('input[name="device[type]"]').val(),
+					platform: $('input[name="device[platform]"]').val(),
+					uid: $('input[name="device[uid]"]').val()
+				},
+				event: {
+					type: $('input[name="event[type]"').val(),
+					payload: {
+						image : $('input[name="event[payload][image]"]').val()
+					}
+				},
+				coords: {
+					latitude: $('input[name="coords[latitude]"]').val(),
+					longitude: $('input[name="coords[longitude]"]').val(),
+					//timestamp: ''+yeah+'-'+month+'-'+day+'T06:59:59.000Z'
+					timestamp:  $('input[name="coords[timestamp]"]').val()
+				}
+			};
 			$.ajax({
 				type: "POST",
 				url: 'jsontest.php',
@@ -150,7 +180,7 @@
 				url: 'deleteevents.php',
 				dataType : 'json',
 				success: function(res){
-					$('#message').append('Added data:<div style="border: 1px solid #ddd; padding: 5px;">' +JSON.stringify(res)+ '</div>');
+					$('#message').append('Delete data:<div style="border: 1px solid #ddd; padding: 5px;">' +JSON.stringify(res)+ '</div>');
 				}
 			})
 		};

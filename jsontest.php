@@ -36,6 +36,7 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, array(
 
 // Call post data URL
 curl_setopt($curl, CURLOPT_URL, ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://").$_SERVER['HTTP_HOST'].'/event.php');  // Set the url path we want to call
+//curl_setopt($curl, CURLOPT_URL, 'http://localhost/3dMap/akademia-analytics/event.php');
 $result = curl_exec($curl);
 
 print_r($result);

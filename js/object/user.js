@@ -20,23 +20,47 @@ function User(data){
     var images  = "";
     if(this.data.event_payload_image !="")
     {
-        images = '<div class="imageInfoBox"><img src="'+this.data.event_payload_image+'" style="max-width: 100%; max-height: 100%"/></div>';
+        images = '<div class="imageInfoBox"><img src="'+this.data.event_payload_image+'" style="width:100%; max-height: 100%"/></div>';
     }
     else if( this.data.avatar !="")
     {
-        var images  = '<div class="imageInfoBox"><img src="'+this.data.avatar+'" style="max-width: 100%; max-height: 100%"/></div>';;
+        var images  = '<div class="imageInfoBox"><img src="'+this.data.avatar+'" style=" width:100%; max-height: 100%"/></div>';;
     }
 
     this.point = {
         position : Cesium.Cartesian3.fromDegrees(this.data.longitude, this.data.latitude),
         description: '<div class="info-description">'
-                  + images
-                  + '<div><span>User id:</span> ' + this.data.user_uid + '</div>'
-                  + '<div><span>Device type:</span> ' + this.data.device_type + '</div>'
-                  + '<div><span>Device platform:</span> ' + this.data.device_platform + '</div>'
-                  + '<div><span>Longitude:</span> ' + this.data.longitude + '</div>'
-                  + '<div><span>Latitude:</span> ' + this.data.latitude + '</div>'
-                  + '<div><span>Timestamp:</span> ' + this.data.timestamp + '</div>'
+                  + '<div><table style="width:100%;text-align: left;font-size: 13;" class="InfoBoxRow">'
+                  + '<tr>'
+                  + '<th rowspan="8">' +images+'</th>'
+                  + '<th >BundleId</th>'
+                  + '<th>'+this.data.bundleid+'</th>'
+                  + '</tr>'
+                  + '<tr>'
+                  + '<th>User id</th>'
+                  + '<th>'+this.data.user_uid+'</th>'
+                  + '</tr>'
+                  + '<tr>'
+                  + '<th>Device type</th>'
+                  + '<th>'+this.data.device_type+'</th>'
+                  + '</tr>'
+                  + '<tr>'
+                  + '<th>Device platform</th>'
+                  + '<th>'+this.data.device_platform+'</th>'
+                  + '</tr>'
+                  + '<tr>'
+                  + '<th>Longitude</th>'
+                  + '<th>'+this.data.longitude+'</th>'
+                  + '</tr>'
+                  + '<tr>'
+                  + '<th>Latitude</th>'
+                  + '<th>'+this.data.latitude+'</th>'
+                  + '</tr>'
+                  + '<tr>'
+                  + '<th>Timestamp</th>'
+                  + '<th>'+this.data.timestamp+'</th>'
+                  + '</tr>'
+                  + '</table></div>'
                   + '</div>'
                   + '<div style="clear: both"></div>'
                   + '<div style="text-align:center">'
@@ -44,7 +68,7 @@ function User(data){
                   + '<input id="jsonUser" type="hidden" value=\''+JSON.stringify(this.data)+'\' />'
                   + '</div>'
                   , 
-        name: this.data.event_type
+        name: this.data.event_type  
     };
 
     if(this.data.shape == 'circle'){
@@ -78,7 +102,6 @@ function User(data){
             color : Cesium.Color.fromBytes(this.data.color[0],this.data.color[1],this.data.color[2], this.data.color[3]*255)
         }
     }
-
     //--------------------------------------------------
     // entity property
     // The entity which save on entities of cesium

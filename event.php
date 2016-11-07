@@ -79,7 +79,7 @@ try{
 			'city'				=> isset($dataObject['coords']['city']) 		? addslashes($dataObject['user']['city']) : '',
 			'country'			=> isset($dataObject['coords']['country'])	? addslashes($dataObject['user']['country']) : '',
 			'event_type'		=> isset($dataObject['event']['type']) 		? addslashes($dataObject['event']['type']) : '',
-			'event_payload_image'		=> isset($dataObject['event']['payload ']['image']) 	? addslashes($dataObject['event']['payload']['image']) : ''
+			'event_payload_image'		=> isset($dataObject['event']['payload']['image']) 	? addslashes($dataObject['event']['payload']['image']) : ''
 		];
 
 		// Call method to save data

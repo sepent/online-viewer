@@ -9,10 +9,9 @@
 window.showRawEvent = function() {
 
  	var iframe = $('iframe[class=cesium-infoBox-iframe]').contents();
-
  	$('#myModal').modal('show');
  	var data = JSON.parse(iframe.find('#jsonUser').val());
-
+    var shape = iframe.find('#shape').val();
  	var ressult = {
             "bundleid": data["bundleid"],
             "user": {
@@ -45,6 +44,9 @@ $('#panel-container').click(function(){
 });
 
 function functionLoad(){
-	var $head = $("iframe.cesium-infoBox-iframe").contents().find("head");                
+	var $head = $("iframe.cesium-infoBox-iframe").contents().find("head");         
     $head.append($("<link/>", { rel: "stylesheet", href: "css/infobox.css", type: "text/css" }));
+    $( ".cesium-infoBox-camera").unbind( "click" );
+    $(".cesium-infoBox-camera").removeAttr("title");
+
 }

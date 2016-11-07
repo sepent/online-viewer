@@ -162,7 +162,7 @@
                 <h4 class="modal-title" id="myModalLabel"><i class="glyphicon glyphicon-pushpin"></i> <span class="title">Event information json</span></h4>
               </div>
               <div class="modal-body">
-               <div rows="4" cols="50" id="dataJsonUser" class="form-control" contenteditable="true" style="min-height: 100px; height: auto"></div>
+               <div id="dataJsonUser" class="form-control" contenteditable="true" style="min-height: 350px; height:auto"></div>
               </div>
             </div>
           </div>
